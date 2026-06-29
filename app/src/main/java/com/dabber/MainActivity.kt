@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         intent?.getStringExtra("transcribe_wav")?.let { runDebugTranscription(it) }
         intent?.getStringExtra("onnx_wav")?.let { runOnnxDebugTranscription(it) }
+        intent?.getStringExtra("qnn_wav")?.let { runQnnDebugTranscription(it) }
     }
 
     override fun onResume() {
@@ -256,6 +257,39 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
+    /**
+     * Debug-only: transcribe a 16 kHz mono WAV on the Hexagon NPU via the QNN execution
+     * provider ([com.dabber.npu.QnnWhisperEngine]). Models must be pushed to
+     * `filesDir/npu-qnn/` (HfWhisperEncoder.onnx + HfWhisperEncoder_qairt_context.bin and
+     * HfWhisperDecoder.onnx + HfWhisperDecoder_qairt_context.bin — each .onnx beside its .bin).
+     * Triggered via:
+     *   `adb shell am start -n com.dabber/.MainActivity --es qnn_wav <path>`
+     * Runs in parallel to the onnx_wav / transcribe_wav hooks; logs under "DabberQnn".
+     * arm64/phone only — the QNN HTP libs do not exist on the x86_64 emulator.
+     */
+    private fun runQnnDebugTranscription(path: String) {
+        Thread {
+            val qnnDir = File(filesDir, "npu-qnn")
+            Log.i(QNN_TAG, "qnnDir=${qnnDir.absolutePath} exists=${qnnDir.exists()}")
+            val engine = com.dabber.npu.QnnWhisperEngine()
+            try {
+                if (!engine.load(qnnDir)) {
+                    Log.e(QNN_TAG, "QNN LOAD FAILED (need HfWhisperEncoder/Decoder .onnx + _qairt_context.bin; arm64 device only)")
+                    return@Thread
+                }
+                val pcm = WavReader.readPcm16Mono(File(path))
+                Log.i(QNN_TAG, "wav samples=${pcm.size}")
+                val t0 = System.currentTimeMillis()
+                val text = engine.transcribe(this, pcm, "he")
+                Log.i(QNN_TAG, "QNN(${System.currentTimeMillis() - t0}ms): $text")
+            } catch (e: Exception) {
+                Log.e(QNN_TAG, "QNN transcription failed", e)
+            } finally {
+                engine.close()
+            }
+        }.start()
+    }
+
     // --- Bubble --------------------------------------------------------------
 
     private fun toggleBubble() {
@@ -294,5 +328,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "DabberTest"
         private const val ONNX_TAG = "DabberOnnx"
+        private const val QNN_TAG = "DabberQnn"
     }
 }

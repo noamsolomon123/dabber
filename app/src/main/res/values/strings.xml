@@ -93,6 +93,15 @@
     <string name="bench_err_oom">אין מספיק זיכרון</string>
     <string name="bench_err_generic">שגיאה לא צפויה</string>
 
+    <!-- Benchmark: NPU (Hexagon) test -->
+    <string name="bench_npu_title">מנוע NPU (Hexagon)</string>
+    <string name="bench_npu_desc">הריצו את התמלול ישירות על מאיץ ה‑NPU של השבב (Qualcomm Hexagon) — בדקו עד כמה זה מהיר על המכשיר שלכם.</string>
+    <string name="bench_npu">🚀 בדוק NPU (Hexagon)</string>
+    <string name="bench_npu_note">מוריד פעם אחת ~2.2GB, ואז רץ על ה‑NPU</string>
+    <string name="bench_npu_idle">הקש/י על \"בדוק NPU (Hexagon)\" כדי להתחיל</string>
+    <string name="bench_npu_result">NPU · %1$s שנ׳</string>
+    <string name="bench_npu_unsupported">NPU לא נתמך במכשיר הזה</string>
+
     <!-- Benchmark: results -->
     <string name="bench_results_title">תוצאות</string>
     <string name="bench_device_model">מכשיר: %1$s</string>

@@ -5,6 +5,7 @@ import android.os.Build
 import com.dabber.asr.WhisperEngine
 import com.dabber.audio.WavReader
 import com.dabber.model.ModelDownloader
+import com.dabber.npu.QnnWhisperEngine
 import org.json.JSONObject
 import java.io.File
 import java.io.IOException
@@ -197,6 +198,36 @@ object BenchmarkRunner {
             return ms to text
         } finally {
             engine.release()
+        }
+    }
+
+    // --- NPU (Hexagon / Qualcomm QNN HTP) flow -------------------------------
+
+    /**
+     * Loads the QNN model files in [npuDir] (`filesDir/npu-qnn/`) into a private
+     * [QnnWhisperEngine], times a single Hebrew transcription of [pcm] with [System.nanoTime],
+     * closes the engine and returns `(elapsedMs, text)`. The timed window covers only
+     * [QnnWhisperEngine.transcribe] (pure NPU inference), not session load.
+     *
+     * If the QNN HTP backend is unavailable — a non-Qualcomm device, the x86_64 emulator, or a
+     * missing `libQnnHtp.so` — [QnnWhisperEngine.load] returns `false`; this surfaces that as an
+     * [UnsatisfiedLinkError] so the caller can show a dedicated "NPU not supported" message,
+     * mirroring how the CPU path treats a genuine native-link failure.
+     *
+     * Native NPU work — **call off the main thread.**
+     */
+    fun transcribeNpu(context: Context, npuDir: File, pcm: FloatArray): Pair<Long, String> {
+        val engine = QnnWhisperEngine()
+        try {
+            if (!engine.load(npuDir)) {
+                throw UnsatisfiedLinkError("QNN NPU (Hexagon) backend unavailable")
+            }
+            val t0 = System.nanoTime()
+            val text = engine.transcribe(context, pcm, "he")
+            val ms = (System.nanoTime() - t0) / 1_000_000L
+            return ms to text
+        } finally {
+            engine.close()
         }
     }
 

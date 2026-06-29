@@ -11,8 +11,8 @@ android {
         applicationId = "com.dabber"
         minSdk = 26
         targetSdk = 35
-        versionCode = 3
-        versionName = "0.2.1"
+        versionCode = 4
+        versionName = "0.3.0"
 
         ndk {
             // arm64-v8a runs on the phone; x86_64 lets the same APK install on the emulator.
@@ -59,9 +59,12 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.lifecycle.service)
-    // ONNX Runtime CPU EP (ships arm64-v8a + x86_64, so it runs on the emulator) for the
-    // com.dabber.npu Whisper engine. NPU swap later: replace with onnxruntime-android-qnn.
-    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.20.0")
+    // ONNX Runtime with the Qualcomm QNN execution provider — bundles the Hexagon HTP .so
+    // libs (libQnnHtp.so, etc.) for arm64-v8a. This drives com.dabber.npu.QnnWhisperEngine
+    // (NPU path). NOTE: the -qnn AAR ships arm64-v8a ONLY (no x86_64 QNN/HTP libs), so on the
+    // x86_64 emulator the ORT-backed engines (Qnn + the CPU OnnxWhisperEngine) are unavailable;
+    // the whisper.cpp engine still runs there. NPU transcription is arm64/phone only.
+    implementation("com.microsoft.onnxruntime:onnxruntime-android-qnn:1.27.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

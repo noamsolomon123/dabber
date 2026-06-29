@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.dabber.R
 import com.dabber.audio.AudioRecorder
 import com.dabber.databinding.ActivityBenchmarkBinding
+import com.dabber.npu.NpuModel
 import java.util.Locale
 import java.util.concurrent.Executors
 
@@ -33,6 +34,13 @@ import java.util.concurrent.Executors
  * ### Secondary flow — accuracy (WER)
  * An optional button runs the bundled-FLEURS accuracy path ([BenchmarkRunner.run]) with
  * [HebrewWer] over `assets/bench`, showing ms · RTF · WER% with an expandable per-clip breakdown.
+ *
+ * ### Tertiary flow — NPU (Hexagon)
+ * A distinct card lets the user record once and transcribe it on the Qualcomm Hexagon NPU. It
+ * downloads the ~2.1 GB QNN model set once (via [NpuModel] into `filesDir/npu-qnn/`), loads
+ * [com.dabber.npu.QnnWhisperEngine] and times one Hebrew transcription
+ * ([BenchmarkRunner.transcribeNpu]). A device without QNN HTP support yields a dedicated
+ * "NPU not supported" message instead of a crash.
  *
  * ### Robustness
  * Every run is wrapped so the UI can **never** freeze: a `finally` always re-enables the buttons,
@@ -59,10 +67,21 @@ class BenchmarkActivity : AppCompatActivity() {
     @Volatile
     private var running = false
 
-    /** On grant, kick off the recording run the user just asked for. */
+    /** Which flow asked for the mic, so the grant callback resumes the right one. */
+    private var pendingNpu = false
+
+    /** On grant, kick off the run (record-and-compare, or NPU) the user just asked for. */
     private val micPermLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-            if (granted) startRecordRun() else setStatus(getString(R.string.need_mic), R.color.brand_accent)
+            val npu = pendingNpu
+            pendingNpu = false
+            if (granted) {
+                if (npu) startNpuRun() else startRecordRun()
+            } else if (npu) {
+                setNpuStatus(getString(R.string.need_mic), R.color.brand_accent)
+            } else {
+                setStatus(getString(R.string.need_mic), R.color.brand_accent)
+            }
         }
 
     // --- Live elapsed timer --------------------------------------------------
@@ -70,11 +89,14 @@ class BenchmarkActivity : AppCompatActivity() {
     private var timerStart = 0L
     private var timerLabel = ""
 
+    /** Status line the live timer writes to (record vs. NPU card); set in [startElapsedTimer]. */
+    private var timerTarget: TextView? = null
+
     /** Repaints the status line with the running model's elapsed seconds every ~500ms. */
     private val timerTick = object : Runnable {
         override fun run() {
             val sec = (System.currentTimeMillis() - timerStart) / 1000L
-            b.benchStatus.text = getString(R.string.bench_running_elapsed, timerLabel, sec)
+            (timerTarget ?: b.benchStatus).text = getString(R.string.bench_running_elapsed, timerLabel, sec)
             ui.postDelayed(this, TIMER_INTERVAL_MS)
         }
     }
@@ -87,6 +109,7 @@ class BenchmarkActivity : AppCompatActivity() {
         b.backBtn.setOnClickListener { finish() }
         b.benchRecordBtn.setOnClickListener { onRecordTapped() }
         b.benchWerBtn.setOnClickListener { startWerRun() }
+        b.benchNpuBtn.setOnClickListener { onNpuTapped() }
     }
 
     override fun onDestroy() {
@@ -100,6 +123,7 @@ class BenchmarkActivity : AppCompatActivity() {
     private fun onRecordTapped() {
         if (running) return
         if (!AudioRecorder.hasPermission(this)) {
+            pendingNpu = false
             micPermLauncher.launch(Manifest.permission.RECORD_AUDIO)
             return
         }
@@ -203,14 +227,100 @@ class BenchmarkActivity : AppCompatActivity() {
     /** One model's result for the WER table; [result] is null when the model failed. */
     private class WerOutcome(val variantId: String, val result: VariantResult?, val error: String?)
 
+    // --- Tertiary flow: NPU (Hexagon) ----------------------------------------
+
+    private fun onNpuTapped() {
+        if (running) return
+        if (!AudioRecorder.hasPermission(this)) {
+            pendingNpu = true
+            micPermLauncher.launch(Manifest.permission.RECORD_AUDIO)
+            return
+        }
+        startNpuRun()
+    }
+
+    /**
+     * Records once, downloads the QNN model set (once, ~2.1 GB) and times a single Hebrew
+     * transcription on the Hexagon NPU. Crash-proof: every failure path maps to an on-screen
+     * message and `finally` always restores the screen and reports through the NPU card.
+     */
+    private fun startNpuRun() {
+        if (running) return
+        beginRun(npu = true)
+        executor.execute {
+            try {
+                runOnUiThread { setNpuStatus(getString(R.string.bench_recording), R.color.brand_working) }
+                val pcm = recorder.record()
+                if (pcm.isEmpty()) {
+                    runOnUiThread { setNpuStatus(getString(R.string.no_speech), R.color.brand_accent) }
+                    return@execute
+                }
+
+                // Download + verify the four QNN files into filesDir/npu-qnn (first run only).
+                val npuDir = NpuModel.ensureAll(this) { msg ->
+                    runOnUiThread { if (running) setNpuStatus(msg, R.color.muted) }
+                }
+
+                runOnUiThread { startElapsedTimer(NPU_LABEL, b.benchNpuStatus) }
+                val (ms, text) = BenchmarkRunner.transcribeNpu(this, npuDir, pcm)
+                runOnUiThread {
+                    stopElapsedTimer()
+                    showNpuResult(ms / 1000.0, text)
+                    setNpuStatus(getString(R.string.bench_done), R.color.brand_success)
+                }
+            } catch (e: UnsatisfiedLinkError) {
+                runOnUiThread { setNpuStatus(getString(R.string.bench_npu_unsupported), R.color.brand_accent) }
+            } catch (e: OutOfMemoryError) {
+                runOnUiThread { setNpuStatus(getString(R.string.bench_err_oom), R.color.brand_accent) }
+            } catch (t: Throwable) {
+                runOnUiThread { setNpuStatus(getString(R.string.bench_failed, t.message ?: ""), R.color.brand_accent) }
+            } finally {
+                runOnUiThread { endRun() }
+            }
+        }
+    }
+
+    /** Shows the single NPU result row ("NPU · <seconds>s") plus the transcribed text (RTL). */
+    private fun showNpuResult(seconds: Double, text: String) {
+        b.benchDevice.text = getString(R.string.bench_device_model, Build.MODEL)
+        b.benchResultsCard.visibility = View.VISIBLE
+        b.benchTable.removeAllViews()
+
+        val row = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(dp(12), dp(12), dp(12), dp(6))
+        }
+        val badge = TextView(this).apply {
+            text = getString(R.string.bench_npu_result, sec(seconds))
+            setTextColor(color(R.color.brand_primary))
+            textSize = 16f
+            setTypeface(typeface, Typeface.BOLD)
+        }
+        row.addView(badge)
+        b.benchTable.addView(row)
+        b.benchTable.addView(transcriptView(ok = true, text = text, error = null))
+    }
+
+    private fun setNpuStatus(msg: String, colorRes: Int) {
+        b.benchNpuStatus.setTextColor(color(colorRes))
+        b.benchNpuStatus.text = msg
+    }
+
     // --- Run lifecycle (crash-proof) -----------------------------------------
 
-    private fun beginRun() {
+    private fun beginRun(npu: Boolean = false) {
         running = true
         b.benchRecordBtn.isEnabled = false
         b.benchWerBtn.isEnabled = false
-        b.benchProgress.visibility = View.VISIBLE
-        setStatus(getString(R.string.bench_preparing), R.color.muted)
+        b.benchNpuBtn.isEnabled = false
+        if (npu) {
+            b.benchNpuProgress.visibility = View.VISIBLE
+            setNpuStatus(getString(R.string.bench_preparing), R.color.muted)
+        } else {
+            b.benchProgress.visibility = View.VISIBLE
+            setStatus(getString(R.string.bench_preparing), R.color.muted)
+        }
     }
 
     /** Always restores an interactive screen — guarantees we never freeze on "מכין…". */
@@ -219,13 +329,16 @@ class BenchmarkActivity : AppCompatActivity() {
         running = false
         b.benchRecordBtn.isEnabled = true
         b.benchWerBtn.isEnabled = true
+        b.benchNpuBtn.isEnabled = true
         b.benchProgress.visibility = View.GONE
+        b.benchNpuProgress.visibility = View.GONE
     }
 
-    private fun startElapsedTimer(label: String) {
+    private fun startElapsedTimer(label: String, target: TextView = b.benchStatus) {
         timerLabel = label
+        timerTarget = target
         timerStart = System.currentTimeMillis()
-        b.benchStatus.setTextColor(color(R.color.brand_working))
+        target.setTextColor(color(R.color.brand_working))
         ui.removeCallbacks(timerTick)
         ui.post(timerTick)
     }
@@ -422,5 +535,8 @@ class BenchmarkActivity : AppCompatActivity() {
         const val SAMPLE_RATE_HZ = 16_000.0
         const val TIMER_INTERVAL_MS = 500L
         const val DASH = "—"
+
+        /** Live-timer label while the Hexagon NPU is transcribing. */
+        const val NPU_LABEL = "NPU"
     }
 }

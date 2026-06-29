@@ -18,3 +18,7 @@ benchmark/data/
 captures/
 *.hprof
 *.iml
+out-npu/
+openai-whisper/
+*.onnx
+*.onnx_data
