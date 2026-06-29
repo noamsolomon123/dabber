@@ -1,0 +1,1 @@
+Test clips: Google FLEURS (he_il), CC-BY-4.0 — used as on-device benchmark fixtures.

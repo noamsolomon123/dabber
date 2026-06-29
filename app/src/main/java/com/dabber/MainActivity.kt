@@ -58,6 +58,9 @@ class MainActivity : AppCompatActivity() {
         b.downloadBtn.setOnClickListener { downloadModel() }
         b.bubbleBtn.setOnClickListener { toggleBubble() }
         b.dictateBtn.setOnClickListener { dictateIntoScratchpad() }
+        b.benchmarkBtn.setOnClickListener {
+            startActivity(Intent(this, com.dabber.bench.BenchmarkActivity::class.java))
+        }
 
         intent?.getStringExtra("transcribe_wav")?.let { runDebugTranscription(it) }
     }

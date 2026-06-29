@@ -24,6 +24,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".bench.BenchmarkActivity"
+            android:exported="false" />
+
         <service
             android:name=".overlay.OverlayService"
             android:exported="false"
