@@ -8,6 +8,14 @@ set(WHISPER_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(WHISPER_BUILD_SERVER OFF CACHE BOOL "" FORCE)
 set(GGML_OPENMP OFF CACHE BOOL "" FORCE)
 
+# Force AVX2/FMA/F16C codepaths for the x86_64 emulator build (the default Android x86_64
+# ABI is baseline-no-AVX, which makes the large-v3 encoder extremely slow on the emulator).
+# add_compile_options applies to the ggml subproject pulled in below. arm64-v8a (the phone)
+# uses NEON SIMD automatically and is unaffected by these x86 flags.
+if(ANDROID_ABI STREQUAL "x86_64")
+    add_compile_options(-mavx2 -mfma -mf16c -mavx)
+endif()
+
 include(FetchContent)
 FetchContent_Declare(
     whisper

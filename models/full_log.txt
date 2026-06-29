@@ -1,0 +1,934 @@
+--------- beginning of main
+06-29 09:43:43.894  1463  1463 I NotificationListener: Handling notification state refresh for com.android.shell#0
+06-29 09:43:43.894  1463  1463 D SsBaseTemplateCard: No text view can be set up
+06-29 09:43:43.894  1463  1463 D SsBaseTemplateCard: Passed-in item info is null
+06-29 09:43:43.895  1463  1463 D SsBaseTemplateCard: Passed-in item info is null
+06-29 09:43:43.895  1463  1463 D SsBaseTemplateCard: Passed-in item info is null
+06-29 09:43:43.895  1463  1463 I SsBaseTemplateCard: Secondary card pane is null
+--------- beginning of system
+06-29 09:43:43.898  1206  1238 V WindowManagerShell: onTransitionReady(transaction=3156800963119)
+06-29 09:43:43.899  1206  1277 V WindowManagerShell: onTransitionReady (#20) android.os.BinderProxy@de6195d: {id=20 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-29 09:43:43.899  1206  1277 V WindowManagerShell:         {m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0x7bd62a0 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:43.899  1206  1277 V WindowManagerShell:         {m=CLOSE f=NONE leash=Surface(name=Task=8)/@0x76fee59 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:43.899  1206  1277 V WindowManagerShell:         {m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0x71dca1e sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}
+06-29 09:43:43.899  1206  1277 V WindowManagerShell:     ]}
+06-29 09:43:43.899  1206  1277 V WindowManagerShell: Playing animation for (#20) android.os.BinderProxy@de6195d@0
+06-29 09:43:43.900  1206  1277 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+06-29 09:43:43.900  1206  1277 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=20 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0x7bd62a0 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},{m=CLOSE f=NONE leash=Surface(name=Task=8)/@0x76fee59 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},{m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0x71dca1e sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}]}
+06-29 09:43:43.902  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=undefined independent=true modes=[CLOSE,TO_BACK] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=null launchCookie=null taskFragmentToken=android.os.BinderProxy@da608cc windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@281715, appThread = android.app.IApplicationThread$Stub$Proxy@7586a2a, debugName = overlayBackTransition }}
+06-29 09:43:43.903  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@77a301b, appThread = android.app.IApplicationThread$Stub$Proxy@990e5b8, debugName = LauncherToDream }}
+06-29 09:43:43.903  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@d000f91, appThread = android.app.IApplicationThread$Stub$Proxy@8eafef6, debugName = QuickstepLaunchHome }}
+06-29 09:43:43.903  1206  1277 D RemoteTransitionHandler: Found filterPair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@d000f91, appThread = android.app.IApplicationThread$Stub$Proxy@8eafef6, debugName = QuickstepLaunchHome }}
+06-29 09:43:43.903  1206  1277 V WindowManagerShell:  Delegate animation for (#20) to RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@d000f91, appThread = android.app.IApplicationThread$Stub$Proxy@8eafef6, debugName = QuickstepLaunchHome }
+06-29 09:43:43.951  1463  1463 D StateManager: createAtomicAnimation - fromState: Background, toState: Normal, partial trace:
+06-29 09:43:43.951  1463  1463 D StateManager: 	at com.android.quickstep.util.ScalingWorkspaceRevealAnim.<init>(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:39)
+06-29 09:43:43.951  1463  1463 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager.createWallpaperOpenAnimations(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:168)
+06-29 09:43:43.951  1463  1463 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager$WallpaperOpenLauncherAnimationRunner.onAnimationStart(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:17)
+06-29 09:43:43.952  1463  1491 I s.nexuslauncher: AssetManager2(0x741caba50978) locale list changing from [] to [en-US]
+06-29 09:43:43.954  1463  1463 D b/311077782: LauncherAnimationRunner.setAnimation
+06-29 09:43:43.989   735   760 V WindowManager: Sent Transition (#20) createdAt=06-29 09:43:43.711 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=8 effectiveUid=10214 displayId=0 isRunning=false baseIntent=Intent { flg=0x10000000 cmp=com.dabber/.MainActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} numActivities=0 lastActiveTime=309753 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{76c5641 Task{aa6cf44 #8 type=standard A=10214:com.dabber}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=true lastNonFullscreenBounds=Rect(321, 784 - 951, 2056) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= false isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 0, 0) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=undefined}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 20 }
+06-29 09:43:43.989   735   760 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-29 09:43:43.989   735   760 V WindowManager:     info={id=20 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-29 09:43:43.989   735   760 V WindowManager:         {WCT{RemoteToken{64c2229 Task{fd959ff #1 type=home}}} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xf18a9ab sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:43.989   735   760 V WindowManager:         {WCT{RemoteToken{76c5641 Task{aa6cf44 #8 type=standard A=10214:com.dabber}}} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0x41452c5 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:43.989   735   760 V WindowManager:         {m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0xafdf225 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}
+06-29 09:43:43.989   735   760 V WindowManager:     ]}
+06-29 09:43:43.991   735   867 I ImeTracker: com.google.android.apps.nexuslauncher:e3cd4675: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+06-29 09:43:44.004  1206  1277 V WindowManagerShell:  animated by com.android.wm.shell.transition.RemoteTransitionHandler@e20c9ab
+06-29 09:43:44.004  1206  1277 W Looper  : Slow dispatch took 106ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=com.android.wm.shell.transition.Transitions$TransitionPlayerImpl$$ExternalSyntheticLambda0@e01b2f7 m=0
+06-29 09:43:44.005  1206  1277 W Looper  : Slow delivery took 77ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=com.android.wm.shell.pip.phone.PipController$$ExternalSyntheticLambda3@d4aa564 m=0
+06-29 09:43:44.005  1206  1277 W Looper  : Drained
+06-29 09:43:44.005  1668  1668 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043 
+06-29 09:43:44.015   735  1193 I ImeTracker: system_server:8737f568: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+06-29 09:43:44.016   735   764 I ImeTracker: system_server:8737f568: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-29 09:43:44.020  1668  1668 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+06-29 09:43:44.022  1463  1463 D InsetsController: hide(ime(), fromIme=false)
+06-29 09:43:44.027  1463  1463 I ImeTracker: com.google.android.apps.nexuslauncher:e3cd4675: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+06-29 09:43:44.032  1668  1668 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.google.android.apps.nexuslauncher, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: EmojiCompatManager.getEmojiCompatIfLoaded():343 EmojiCompat.init() was never called.
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: java.lang.IllegalStateException: EmojiCompat is not initialized. Please call EmojiCompat.init() first
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at asx.p(PG:6)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at axb.b(PG:13)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at jnr.b(PG:2)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at jnr.c(PG:4)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at jnr.f(PG:3)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at jnx.c(PG:3)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at kif.cz(PG:47)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at lhl.run(PG:1025)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at jaf.execute(PG:12)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at nco.v(PG:13)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at lhn.m(PG:96)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at lhn.k(PG:25)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at kgn.onStartInput(PG:250)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService.doStartInput(InputMethodService.java:3521)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.startInput(InputMethodService.java:879)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.dispatchStartInput(InputMethodService.java:908)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.IInputMethodWrapper.executeMessage(IInputMethodWrapper.java:201)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at android.os.Handler.dispatchMessage(Handler.java:110)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at android.os.Looper.loopOnce(Looper.java:248)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at android.os.Looper.loop(Looper.java:338)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at java.lang.reflect.Method.invoke(Native Method)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+06-29 09:43:44.033  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+06-29 09:43:44.034   598   627 D PermissionCache: checking android.permission.WAKEUP_SURFACE_FLINGER for uid=10180 => granted (15088 us)
+06-29 09:43:44.035  1668  1668 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+06-29 09:43:44.037   735  2077 W PackageConfigPersister: App-specific configuration not found for packageName: com.google.android.apps.nexuslauncher and userId: 0
+06-29 09:43:44.044   598   598 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-29 09:43:44.051   735   765 W ActivityTaskManager: Unable to send transaction to client proc com.dabber: no app thread
+06-29 09:43:44.093   735  2077 W ActivityTaskManager: callingPackage for (uid=2000, pid=6954) has no WPC
+06-29 09:43:44.097   735  2077 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10214, packageName = null, attributionTag = null, token = android.os.Binder@5ced996, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-29 09:43:44.101   735  2077 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE
+06-29 09:43:44.102   735  2077 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE
+06-29 09:43:44.102   735  2077 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+06-29 09:43:44.103   735  2077 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+06-29 09:43:44.109   735  2077 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+06-29 09:43:44.111   735  2077 V SplashScreenExceptionList: SplashScreen checking exception for package com.dabber (target sdk:35) -> false
+06-29 09:43:44.114   735  1193 D CompatChangeReporter: Compat change id reported: 309578419; UID 10214; state: ENABLED
+06-29 09:43:44.116   735  2077 I ActivityTaskManager: Add Task{aa6cf44 #8 type=standard A=10214:com.dabber} to hidden list because adding Task{a16914f #9 type=standard A=10214:com.dabber}
+06-29 09:43:44.117   735  2077 I ActivityTaskManager: START u0 {flg=0x10000000 xflg=0x5 cmp=com.dabber/.MainActivity (has extras)} with LAUNCH_MULTIPLE from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+06-29 09:43:44.123  1206  1277 V WindowManagerShell: Transition requested (#21): android.os.BinderProxy@1b05a30 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=9 effectiveUid=10214 displayId=0 isRunning=true baseIntent=Intent { flg=0x10000000 cmp=com.dabber/.MainActivity } baseActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} topActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} origActivity=null realActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} numActivities=1 lastActiveTime=647888 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@4b136a9} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 136 - 0, 0) topActivityInfo=ActivityInfo{dd1f42e com.dabber.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(321, 784 - 951, 2056) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1272, 2772) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 21 }
+06-29 09:43:44.124  1206  1277 D ShellSplitScreen: logExit: no-op, mLoggerSessionId is null
+06-29 09:43:44.128   735   764 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10214, packageName = null, attributionTag = null, token = android.os.Binder@5ced996, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+06-29 09:43:44.149  1206  1334 D SplashScreenView: Build android.window.SplashScreenView{d7811e1 V.E...... ......ID 0,0-0,0}
+06-29 09:43:44.149  1206  1334 D SplashScreenView: Icon: view: android.widget.ImageView{6985b06 V.ED..... ......I. 0,0-0,0 #1020542 android:id/splashscreen_icon_view} drawable: com.android.wm.shell.startingsurface.SplashscreenIconDrawableFactory$ImmobileIconDrawable@73ec5c7 size: 450
+06-29 09:43:44.149  1206  1334 D SplashScreenView: Branding: view: android.view.View{4e707f4 G.ED..... ......I. 0,0-0,0 #1020541 android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+06-29 09:43:44.159   524   524 D Zygote  : Forked child process 6957
+06-29 09:43:44.167   735  2077 D CoreBackPreview: Window{dd4f36b u0 Splash Screen com.dabber}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c95d686, mPriority=0, mIsAnimationCallback=false, mOverrideBehavior=0}
+06-29 09:43:44.169   735   771 I ActivityManager: Start proc 6957:com.dabber/u0a214 for next-top-activity {com.dabber/com.dabber.MainActivity}
+06-29 09:43:44.170   735   771 I ActivityManager: ProcessObserver broadcast disabled
+06-29 09:43:44.179  6957  6957 I com.dabber: Late-enabling -Xcheck:jni
+06-29 09:43:44.203  1463  1467 I s.nexuslauncher: Background concurrent mark compact GC freed 4381KB AllocSpace bytes, 4(376KB) LOS objects, 49% free, 8848KB/17MB, paused 2.028ms,9.269ms total 200.993ms
+06-29 09:43:44.218  6957  6957 I com.dabber: Using CollectorTypeCMC GC.
+06-29 09:43:44.221  6957  6957 W com.dabber: Unexpected CPU variant for x86: x86_64.
+06-29 09:43:44.221  6957  6957 W com.dabber: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, default
+06-29 09:43:44.228   607   623 I adbd    : jdwp connection from 6957
+06-29 09:43:44.242  6957  6957 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+06-29 09:43:44.263  1206  1218 I ndroid.systemui: NativeAlloc concurrent mark compact GC freed 3260KB AllocSpace bytes, 35(1472KB) LOS objects, 49% free, 24MB/48MB, paused 4.177ms,6.601ms total 248.767ms
+06-29 09:43:44.283   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:43:44.297   598   627 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-29 09:43:44.308  1463  1463 W SplitSelectStateCtor: Missing session instanceIds
+06-29 09:43:44.308  1463  1463 D StatsLog: LAUNCHER_SPLIT_SELECTION_EXIT_INTERRUPTED
+06-29 09:43:44.308  1206  1277 D WindowManagerShell: setLauncherKeepClearAreaHeight: visible=false, height=565
+06-29 09:43:44.312   735  2077 I AppsFilter: interaction: PackageSetting{d933550 com.android.microdroid.empty_payload/10190} -> PackageSetting{dfa64e3 com.dabber/10214} BLOCKED
+06-29 09:43:44.319   735  2077 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS
+06-29 09:43:44.319   735  2077 D CompatChangeReporter: Compat change id reported: 324203798; UID 10214; state: ENABLED
+06-29 09:43:44.322   735  1146 I AppWidgetServiceImpl: Received broadcast: android.intent.action.PACKAGE_UNSTOPPED on user 0
+06-29 09:43:44.323   735  1146 I AppWidgetServiceImpl: Updating package stopped masked state for uid 10214 package com.dabber isStopped false
+06-29 09:43:44.324   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:43:44.330   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:43:44.330   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:43:44.483  6957  6957 D nativeloader: Configuring clns-9 for other apk /data/app/~~8Q5Ie2D5DSQV2TQ2v5QbtA==/com.dabber-rZdwSeXJb7NsYNnWPKBitA==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~8Q5Ie2D5DSQV2TQ2v5QbtA==/com.dabber-rZdwSeXJb7NsYNnWPKBitA==/lib/x86_64:/data/app/~~8Q5Ie2D5DSQV2TQ2v5QbtA==/com.dabber-rZdwSeXJb7NsYNnWPKBitA==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.dabber
+06-29 09:43:44.491  6957  6957 D CompatChangeReporter: Compat change id reported: 202956589; UID 10214; state: ENABLED
+06-29 09:43:44.497  6957  6957 I com.dabber: AssetManager2(0x741cab9df818) locale list changing from [] to [en-US]
+06-29 09:43:44.510  6957  6957 V GraphicsEnvironment: Currently set values for:
+06-29 09:43:44.510  6957  6957 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+06-29 09:43:44.511  6957  6957 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+06-29 09:43:44.511  6957  6957 V GraphicsEnvironment: com.dabber is not listed in per-application setting
+06-29 09:43:44.511  6957  6957 V GraphicsEnvironment: ANGLE allowlist from config: 
+06-29 09:43:44.512  6957  6957 V GraphicsEnvironment: com.dabber is not listed in ANGLE allowlist or settings, returning default
+06-29 09:43:44.512  6957  6957 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+06-29 09:43:44.559   735   760 V WindowManager: Sent Transition (#21) createdAt=06-29 09:43:44.104 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=9 effectiveUid=10214 displayId=0 isRunning=true baseIntent=Intent { flg=0x10000000 cmp=com.dabber/.MainActivity } baseActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} topActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} origActivity=null realActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} numActivities=1 lastActiveTime=647888 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{93b870d Task{a16914f #9 type=standard A=10214:com.dabber}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 136 - 0, 0) topActivityInfo=ActivityInfo{28ca6c2 com.dabber.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(321, 784 - 951, 2056) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1272, 2772) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 21 }
+06-29 09:43:44.560  1463  1469 W System  : A resource failed to call release. 
+06-29 09:43:44.560  1206  1238 V WindowManagerShell: onTransitionReady(transaction=3156800963136)
+06-29 09:43:44.561   735   760 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-29 09:43:44.561   735   760 V WindowManager:     info={id=21 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-29 09:43:44.561   735   760 V WindowManager:         {WCT{RemoteToken{93b870d Task{a16914f #9 type=standard A=10214:com.dabber}}} m=OPEN f=NONE leash=Surface(name=Task=9)/@0xabda437 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:44.561   735   760 V WindowManager:         {WCT{RemoteToken{64c2229 Task{fd959ff #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xf18a9ab sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:44.561   735   760 V WindowManager:         {m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0xafdf225 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}
+06-29 09:43:44.561   735   760 V WindowManager:     ]}
+06-29 09:43:44.563  1206  1277 V WindowManagerShell: onTransitionReady (#21) android.os.BinderProxy@1b05a30: {id=21 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+06-29 09:43:44.563  1206  1277 V WindowManagerShell:         {m=OPEN f=NONE leash=Surface(name=Task=9)/@0x1950ea sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:44.563  1206  1277 V WindowManagerShell:         {m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x6aefdb sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:44.563  1206  1277 V WindowManagerShell:         {m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0xff0a78 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}
+06-29 09:43:44.563  1206  1277 V WindowManagerShell:     ]}
+06-29 09:43:44.563  1206  1277 V WindowManagerShell: Transition (#21) android.os.BinderProxy@1b05a30@0 ready while (#20) android.os.BinderProxy@de6195d@0 is still animating. Notify the animating transition in case they can be merged
+06-29 09:43:44.563  1206  1277 V WindowManagerShell:    Merge into remote: RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@d000f91, appThread = android.app.IApplicationThread$Stub$Proxy@8eafef6, debugName = QuickstepLaunchHome }
+06-29 09:43:44.564  1463  1469 W System  : A resource failed to call release. 
+06-29 09:43:44.564  1463  1469 W System  : A resource failed to call release. 
+06-29 09:43:44.566  1206  1277 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#20) android.os.BinderProxy@de6195d@0
+06-29 09:43:44.567   735   760 V WindowManager: Finish Transition (#20): created at 06-29 09:43:43.711 collect-started=0.172ms request-sent=0.265ms started=10.774ms ready=183.258ms sent=185.596ms commit=23.334ms finished=855.772ms
+--------- beginning of kernel
+06-29 09:43:44.545     0     0 W binder_debug: 12 callbacks suppressed
+06-29 09:43:44.545     0     0 I binder  : 1193:735 cannot find target node
+06-29 09:43:44.572   735  1193 E IPCThreadState: Binder transaction failure. id: 368635, BR_*: 29189, error: -22 (Invalid argument)
+06-29 09:43:44.573   735  1193 W ActivityManager: pid 735 system sent binder code 7 with flags 1 to frozen apps and got error -32
+06-29 09:43:44.573   735  1193 W WindowManager: Exception thrown during dispatchAppVisibility Window{19e84fe u0 com.dabber/com.dabber.MainActivity EXITING}
+06-29 09:43:44.573   735  1193 W WindowManager: android.os.DeadObjectException
+06-29 09:43:44.573   735  1193 W WindowManager: 	at android.os.BinderProxy.transactNative(Native Method)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at android.os.BinderProxy.transact(BinderProxy.java:592)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at android.view.IWindow$Stub$Proxy.dispatchAppVisibility(IWindow.java:557)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.WindowState.sendAppVisibilityToClients(WindowState.java:3151)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.WindowContainer.sendAppVisibilityToClients(WindowContainer.java:1311)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.WindowToken.setClientVisible(WindowToken.java:389)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.ActivityRecord.setClientVisible(ActivityRecord.java:6650)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.ActivityRecord.commitVisibility(ActivityRecord.java:5561)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.Transition.finishTransition(Transition.java:1391)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.TransitionController.finishTransition(TransitionController.java:1029)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.finishTransition(WindowOrganizerController.java:496)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at android.window.IWindowOrganizerController$Stub.onTransact(IWindowOrganizerController.java:261)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.onTransact(WindowOrganizerController.java:223)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at android.os.Binder.execTransactInternal(Binder.java:1421)
+06-29 09:43:44.573   735  1193 W WindowManager: 	at android.os.Binder.execTransact(Binder.java:1365)
+06-29 09:43:44.574   735  1193 W Process : Unable to open /proc/6736/status
+06-29 09:43:44.583  1206  1277 V WindowManagerShell: Playing animation for (#21) android.os.BinderProxy@1b05a30@0
+06-29 09:43:44.583  1206  1277 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+06-29 09:43:44.584  1206  1277 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=21 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=OPEN f=NONE leash=Surface(name=Task=9)/@0x1950ea sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},{m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x6aefdb sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},{m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0xff0a78 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}]}
+06-29 09:43:44.586  6957  6957 D CompatChangeReporter: Compat change id reported: 279646685; UID 10214; state: ENABLED
+06-29 09:43:44.548     0     0 I binder  : 735:1193 transaction async to 0:0 failed 368635/29189/-22, size 64-0 line 3348
+06-29 09:43:44.586  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=undefined independent=true modes=[CLOSE,TO_BACK] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=null launchCookie=null taskFragmentToken=android.os.BinderProxy@da608cc windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@281715, appThread = android.app.IApplicationThread$Stub$Proxy@7586a2a, debugName = overlayBackTransition }}
+06-29 09:43:44.590  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@77a301b, appThread = android.app.IApplicationThread$Stub$Proxy@990e5b8, debugName = LauncherToDream }}
+06-29 09:43:44.590  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@d000f91, appThread = android.app.IApplicationThread$Stub$Proxy@8eafef6, debugName = QuickstepLaunchHome }}
+06-29 09:43:44.592  1206  1277 V WindowManagerShell:  Delegate animation for (#21) to null
+06-29 09:43:44.592  1206  1277 V WindowManagerShell: start default transition animation, info = {id=21 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=OPEN f=NONE leash=Surface(name=Task=9)/@0x1950ea sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},{m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x6aefdb sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},{m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0xff0a78 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}]}
+06-29 09:43:44.593  1206  1277 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@c565624 animAttr=0x13 type=OPEN isEntrance=false
+06-29 09:43:44.594  1206  1277 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@2d9d58d animAttr=0x12 type=OPEN isEntrance=true
+06-29 09:43:44.595  1206  1277 V WindowManagerShell:  animated by com.android.wm.shell.transition.DefaultTransitionHandler@312543d
+06-29 09:43:44.633   598   598 E BpTransactionCompletedListener: Failed to transact (-32)
+06-29 09:43:44.655  6957  6972 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+06-29 09:43:44.679  6957  6957 I com.dabber: AssetManager2(0x741cab9e55d8) locale list changing from [] to [en-US]
+06-29 09:43:44.806  6957  6972 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+06-29 09:43:44.811  6957  6972 I EGL_emulation: Opening libGLESv2_emulation.so
+06-29 09:43:44.840  6957  6972 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+06-29 09:43:44.878  6957  6957 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+06-29 09:43:44.884  6957  6957 I com.dabber: AssetManager2(0x741cab9df4f8) locale list changing from [] to [en-US]
+06-29 09:43:44.906  6957  6957 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+06-29 09:43:44.930  1206  1277 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#21) android.os.BinderProxy@1b05a30@0
+06-29 09:43:44.938  1206  1277 V WindowManagerShell: Track 0 became idle
+06-29 09:43:44.938  1206  1277 V WindowManagerShell: All active transition animations finished
+06-29 09:43:44.941   735   760 V WindowManager: Finish Transition (#21): created at 06-29 09:43:44.104 collect-started=0.157ms request-sent=12.83ms started=20.73ms ready=446.952ms sent=454.154ms commit=54.484ms finished=827.216ms
+06-29 09:43:44.972   735  6974 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+06-29 09:43:44.976   735  6974 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+06-29 09:43:44.978   735  6974 I EGL_emulation: Opening libGLESv2_emulation.so
+06-29 09:43:44.979  1463  1463 D ScalingWorkspaceRevealAnim: alpha of workspace at the end of animation: 1.0
+06-29 09:43:44.985   735  6974 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+06-29 09:43:45.003   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:43:45.004   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:43:45.004   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:43:45.005   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:43:45.006   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:45.006   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:45.006   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:45.006   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:45.007  1463  1463 D RecentsView: onTaskRemoved: 8, not handling task stack changes
+06-29 09:43:45.008  1463  1463 D RecentsView: onTaskRemoved: 8, not handling task stack changes
+06-29 09:43:45.009   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:45.009   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:45.010   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:45.010   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:45.012   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:43:45.012   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:43:45.013   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:43:45.013   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3038] from screen [on:0 period:314797173] score=60
+06-29 09:43:45.014  1463  1463 D VRI[NexusLauncherActivity]: visibilityChanged oldVisibility=true newVisibility=false
+06-29 09:43:45.015  1463  1463 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=7}
+06-29 09:43:45.090  6957  6957 D CompatChangeReporter: Compat change id reported: 63938206; UID 10214; state: ENABLED
+06-29 09:43:45.115  6957  6957 W HWUI    : Image decoding logging dropped!
+06-29 09:43:45.120  6957  6957 W HWUI    : Image decoding logging dropped!
+06-29 09:43:45.121  6957  6957 W HWUI    : Image decoding logging dropped!
+06-29 09:43:45.126  6957  6957 D CompatChangeReporter: Compat change id reported: 352594277; UID 10214; state: ENABLED
+06-29 09:43:45.140  6957  6957 D CompatChangeReporter: Compat change id reported: 303326708; UID 10214; state: ENABLED
+06-29 09:43:45.147  6957  6957 D CompatChangeReporter: Compat change id reported: 309578419; UID 10214; state: ENABLED
+06-29 09:43:45.150  6957  6957 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+06-29 09:43:45.185  6957  6957 I com.dabber: hiddenapi: Accessing hidden method Landroid/view/ViewGroup;->makeOptionalFitsSystemWindows()V (runtime_flags=0, domain=platform, api=unsupported) from Landroidx/appcompat/widget/ViewUtils; (domain=app) using reflection: allowed
+06-29 09:43:45.238  6957  6975 D nativeloader: Load /data/app/~~8Q5Ie2D5DSQV2TQ2v5QbtA==/com.dabber-rZdwSeXJb7NsYNnWPKBitA==/base.apk!/lib/x86_64/libdabber_whisper.so using class loader ns clns-9 (caller=/data/app/~~8Q5Ie2D5DSQV2TQ2v5QbtA==/com.dabber-rZdwSeXJb7NsYNnWPKBitA==/base.apk!classes7.dex): ok
+06-29 09:43:45.256  6957  6957 D CompatChangeReporter: Compat change id reported: 349153669; UID 10214; state: ENABLED
+06-29 09:43:45.261  6957  6957 W HWUI    : Unknown dataspace 0
+06-29 09:43:45.236     0     0 I servicemanager: Caller(pid=6957,uid=10214,sid=u:r:untrusted_app:s0:c214,c256,c512,c768) Found android.hardware.graphics.allocator.IAllocator/default in device VINTF manifest.
+06-29 09:43:45.273  6957  6957 I Choreographer: Skipped 37 frames!  The application may be doing too much work on its main thread.
+06-29 09:43:45.284  6957  6957 D AutofillManager: view not autofillable - has multiline input type
+06-29 09:43:45.284  6957  6957 D AutofillManager: view not autofillable - has multiline input type
+06-29 09:43:45.250     0     0 I servicemanager: Caller(pid=6957,uid=10214,sid=u:r:untrusted_app:s0:c214,c256,c512,c768) Found android.hardware.graphics.allocator.IAllocator/default in device VINTF manifest.
+06-29 09:43:45.253     0     0 I servicemanager: Caller(pid=6957,uid=10214,sid=u:r:untrusted_app:s0:c214,c256,c512,c768) Found mapper/ranchu in device VINTF manifest.
+06-29 09:43:45.308   735  2077 D CoreBackPreview: Window{6eeae22 u0 com.dabber/com.dabber.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c403de9, mPriority=0, mIsAnimationCallback=false, mOverrideBehavior=0}
+06-29 09:43:45.890  6957  6957 I Choreographer: Skipped 36 frames!  The application may be doing too much work on its main thread.
+06-29 09:43:45.894   735   760 I ActivityTaskManager: Displayed com.dabber/.MainActivity for user 0: +1s798ms
+06-29 09:43:45.904  1463  1463 D BaseDepthController: setSurface:
+06-29 09:43:45.904  1463  1463 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+06-29 09:43:45.904  1463  1463 D BaseDepthController: 	mBaseSurface: null
+06-29 09:43:45.905  1463  1463 D BaseDepthController: mSurface is null and mCurrentBlur is: 0
+06-29 09:43:45.906  1463  1463 D StateManager: goToState - fromState: Normal, toState: Normal, partial trace:
+06-29 09:43:45.906  1463  1463 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:4)
+06-29 09:43:45.906  1463  1463 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:1)
+06-29 09:43:45.906  1463  1463 D StateManager: 	at com.android.launcher3.statemanager.StatefulActivity.onStop(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:34)
+06-29 09:43:45.906  1463  1463 D StatsLog: LAUNCHER_ONSTOP
+06-29 09:43:45.907  1463  1463 D StatsLog: LAUNCHER_GOOGLE_SEARCH_RESTORE_LIST_SIZE_AFTER_ACTIVITY_RESTART
+06-29 09:43:45.923   735  2362 I AppWidgetServiceImpl: setAppWidgetHidden() 0
+06-29 09:43:45.926   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:43:45.930  6957  6968 I HWUI    : Davey! duration=1239ms; Flags=1, FrameTimelineVsyncId=12682, IntendedVsync=648418339142, Vsync=649035005784, InputEventId=0, HandleInputStart=649046612900, AnimationStart=649046718100, PerformTraversalsStart=649047266500, DrawStart=649120341600, FrameDeadline=648435005808, FrameStartTime=649044505600, FrameInterval=16666666, WorkloadTarget=16666666, SyncQueued=649132260000, SyncStart=649132757500, IssueDrawCommandsStart=649132984200, SwapBuffers=649502499500, FrameCompleted=649657941900, DequeueBufferDuration=99200, QueueBufferDuration=2960400, GpuCompleted=649657424900, SwapBuffersCompleted=649657941900, DisplayPresentTime=0, CommandSubmissionCompleted=649502499500, 
+06-29 09:43:45.959   521   556 I netd    : tetherGetStats() -> {[]} <7.26ms>
+06-29 09:43:45.961  3122  3195 I FontLog : Received query Noto Color Emoji Compat, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+06-29 09:43:45.961  3122  3195 I FontLog : Query [emojicompat-emoji-font] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+06-29 09:43:45.964  3122  3195 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+06-29 09:43:45.994  3122  3182 I FontLog : Pulling font file for id = 14, cache size = 8 [CONTEXT service_id=132 ]
+06-29 09:43:46.010  3122  3182 I FontLog : Pulling font file for id = 14, cache size = 8 [CONTEXT service_id=132 ]
+06-29 09:43:46.023   735   867 I ImeTracker: com.dabber:6e1b6645: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+06-29 09:43:46.049  1668  1668 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043 
+06-29 09:43:46.052  1668  1668 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+06-29 09:43:46.053   735  2077 I ImeTracker: system_server:443d1641: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+06-29 09:43:46.071   735   764 I ImeTracker: system_server:443d1641: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-29 09:43:46.074  1668  1668 W NotificationCenter: NotificationCenter$NotificationQueue.notifyPendingNotificationsOnExecutor():877 Heavy notify work detected on UI thread: [kig->ilu, kig->ilu, kig->jnx, kig->ilu, kig->ilu, kig->khc, kig->imt, kig->fro, kig->ilu, kig->ilu, kig->lux, kig->ilu, kig->ilu, kig->ilu, kig->ilu, kig->ilu, kig->ilu, kig->fef, kig->ilu, kig->fcb, kig->ijm, kig->khg] takes 22ms
+06-29 09:43:46.077  1668  1668 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.dabber, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+06-29 09:43:46.082  6957  6957 D InsetsController: hide(ime(), fromIme=false)
+06-29 09:43:46.083  6957  6957 I ImeTracker: com.dabber:6e1b6645: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: EmojiCompatManager.getEmojiCompatIfLoaded():343 EmojiCompat.init() was never called.
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: java.lang.IllegalStateException: EmojiCompat is not initialized. Please call EmojiCompat.init() first
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at asx.p(PG:6)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at axb.b(PG:13)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at jnr.b(PG:2)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at jnr.c(PG:4)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at jnr.f(PG:3)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at jnx.c(PG:3)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at kif.cz(PG:47)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at lhl.run(PG:1025)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at jaf.execute(PG:12)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at nco.v(PG:13)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at lhn.m(PG:96)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at lhn.k(PG:25)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at kgn.onStartInput(PG:250)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService.doStartInput(InputMethodService.java:3521)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.startInput(InputMethodService.java:879)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.dispatchStartInput(InputMethodService.java:908)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.IInputMethodWrapper.executeMessage(IInputMethodWrapper.java:201)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at android.os.Handler.dispatchMessage(Handler.java:110)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at android.os.Looper.loopOnce(Looper.java:248)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at android.os.Looper.loop(Looper.java:338)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at java.lang.reflect.Method.invoke(Native Method)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+06-29 09:43:46.093  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+06-29 09:43:46.098  1668  1668 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+06-29 09:43:46.103   735  2077 W PackageConfigPersister: App-specific configuration not found for packageName: com.dabber and userId: 0
+06-29 09:43:46.297  1206  1332 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@a57f763
+06-29 09:43:46.303   735  2077 D CoreBackPreview: Window{dd4f36b u0 Splash Screen com.dabber EXITING}: Setting back callback null
+06-29 09:43:47.450  6957  6962 I com.dabber: Compiler allocated 5042KB to compile void android.view.ViewRootImpl.performTraversals()
+06-29 09:43:48.022   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:43:48.023   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:43:48.023   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:43:48.023   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:43:48.024   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:48.024   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:48.024   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:48.024   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:48.024   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:48.024   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:48.025   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:48.025   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:48.030   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:43:48.030   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:43:48.030   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:43:48.030   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3017] from screen [on:0 period:314800190] score=60
+06-29 09:43:48.146   735  3154 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+06-29 09:43:50.690  6957  6975 I DabberWhisper: whisper model loaded
+06-29 09:43:50.691  6957  6975 I DabberTest: model loaded=true path=/storage/emulated/0/Android/data/com.dabber/files/models/dabber-he.bin exists=true
+06-29 09:43:50.691  6957  6976 W com.dabber: Long monitor contention with owner Thread-2 (6975) at boolean com.dabber.core.DictationCore.loadModel(java.lang.String)(DictationCore.kt:32) waiters=0 in boolean com.dabber.core.DictationCore.loadModel(java.lang.String) for 5.450s
+06-29 09:43:50.709  6957  6957 I com.dabber: Waiting for a blocking GC NativeAlloc
+06-29 09:43:50.712  1789  1971 E MediaProvider: Permission to access file: /storage/emulated/0/clip.wav is denied
+--------- beginning of crash
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: FATAL EXCEPTION: Thread-2
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: Process: com.dabber, PID: 6957
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: java.io.FileNotFoundException: /sdcard/clip.wav: open failed: EACCES (Permission denied)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at libcore.io.IoBridge.open(IoBridge.java:574)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at java.io.FileInputStream.<init>(FileInputStream.java:179)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at kotlin.io.FilesKt__FileReadWriteKt.readBytes(FileReadWrite.kt:69)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at com.dabber.audio.WavReader.readPcm16Mono(WavReader.kt:15)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at com.dabber.MainActivity.runDebugTranscription$lambda$13(MainActivity.kt:189)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at com.dabber.MainActivity.$r8$lambda$E7kHAjWiudwTMtgrMIuvJJAjRpU(Unknown Source:0)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at com.dabber.MainActivity$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at java.lang.Thread.run(Thread.java:1119)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: Caused by: android.system.ErrnoException: open failed: EACCES (Permission denied)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at libcore.io.Linux.open(Native Method)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:568)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:274)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:568)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:8953)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	at libcore.io.IoBridge.open(IoBridge.java:560)
+06-29 09:43:50.714  6957  6975 E AndroidRuntime: 	... 7 more
+06-29 09:43:50.718   735  6986 I DropBoxManagerService: add tag=data_app_crash isTagEnabled=true flags=0x2
+06-29 09:43:50.721   735  2362 W ActivityTaskManager:   Force finishing activity com.dabber/.MainActivity
+06-29 09:43:50.722  1206  1277 V WindowManagerShell: Transition requested (#22): android.os.BinderProxy@24385cb TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=9 effectiveUid=10214 displayId=0 isRunning=true baseIntent=Intent { flg=0x10000000 cmp=com.dabber/.MainActivity } baseActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} topActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} origActivity=null realActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} numActivities=1 lastActiveTime=648091 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@f8601a8} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{8014c1 com.dabber.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(321, 784 - 951, 2056) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1272, 2772) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 16, debugId = 22 }
+06-29 09:43:50.727   598   793 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-29 09:43:50.734  6957  6975 I Process : Sending signal. PID: 6957 SIG: 9
+06-29 09:43:50.741   598   598 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-29 09:43:50.819   607   607 I adbd    : Remote process closed the socket (on MSG_PEEK)
+06-29 09:43:50.821   735  2077 I ActivityManager: Process com.dabber (pid 6957) has died: fg  TOP 
+06-29 09:43:50.821   524   524 I Zygote  : Process 6957 exited due to signal 9 (Killed)
+06-29 09:43:50.822   735   772 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_10214/pid_6957
+06-29 09:43:50.823   735  1193 I ImeTracker: com.dabber:ef91d2a5: onRequestHide at ORIGIN_SERVER reason HIDE_REMOVE_CLIENT fromUser false
+06-29 09:43:50.824   735  1193 I ImeTracker: com.dabber:ef91d2a5: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-29 09:43:50.824   735  2077 D OomAdjuster: Not killing cached processes
+06-29 09:43:50.800     0     0 I binder  : undelivered transaction 370537, process died.
+06-29 09:43:50.825   735  1473 I WindowManager: WIN DEATH: Window{6eeae22 u0 com.dabber/com.dabber.MainActivity}
+06-29 09:43:50.833   735   764 W ActivityManager: setHasOverlayUi called on unknown pid: 6957
+06-29 09:43:50.834  1463  1463 D ViewRootImpl: Skipping stats log for color mode
+06-29 09:43:50.836   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-29 09:43:50.836   735  2077 I AppWidgetServiceImpl: startListening() 0
+06-29 09:43:50.837  1463  1463 D StatsLog: LAUNCHER_ONRESUME
+06-29 09:43:50.838   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-29 09:43:50.838   735  1120 D InetDiagMessage: Destroyed live tcp sockets for uids={10214} in 6ms
+06-29 09:43:50.839   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:43:50.839  1206  1277 D WindowManagerShell: setLauncherKeepClearAreaHeight: visible=true, height=565
+06-29 09:43:50.841   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-29 09:43:50.841   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:43:50.842   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:43:50.843   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-29 09:43:50.843   735  1120 D InetDiagMessage: Destroyed live tcp sockets for uids={20214} in 5ms
+06-29 09:43:50.847  1463  1491 D QuickstepModelDelegate: notifyAppTargetEvent action=1 launchLocation=workspace/0/[-1,-1]/[1,1]
+06-29 09:43:50.850  1463  1463 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=6}
+06-29 09:43:50.856  1807  1950 I AiAiEcho: Predicting[0]:  [CONTEXT sampling_count=5 ]
+06-29 09:43:50.857  1807  1950 I AiAiEcho: EchoTargets: 
+06-29 09:43:50.857  1807  1950 I AiAiEcho: Filtered by AiAi flag check: 
+06-29 09:43:50.857  1807  1950 I AiAiEcho: [CONTEXT ratelimit_period="10 SECONDS" ]
+06-29 09:43:50.857  1807  1950 I AiAiEcho: #remoteViewsTwiddler: feature disabled.
+06-29 09:43:50.858  1807  1950 I AiAiEcho: #postPredictionTargets: Sending updates to UISurface home with targets# 0 (types=[])
+06-29 09:43:50.865  1463  1463 D BaseDepthController: setSurface:
+06-29 09:43:50.865  1463  1463 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+06-29 09:43:50.865  1463  1463 D BaseDepthController: 	mBaseSurface: Surface(name=com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity)/@0x484ba82
+06-29 09:43:50.876   735   765 W ActivityTaskManager: Unable to send transaction to client proc com.dabber: no app thread
+06-29 09:43:50.894   521   556 I netd    : tetherGetStats() -> {[]} <3.88ms>
+06-29 09:43:50.899   735   838 D ActivityManager: sync unfroze 6272 com.google.android.googlequicksearchbox:search for 6
+06-29 09:43:50.920  1463  1463 I NotificationListener: Handling notification state refresh for com.android.shell#0
+06-29 09:43:50.920  1463  1463 D SsBaseTemplateCard: No text view can be set up
+06-29 09:43:50.920   735  1120 D ConnectivityService: releasing NetworkRequest [ REQUEST id=209, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10147 RequestorUid: 10147 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ] (release request)
+06-29 09:43:50.920  1463  1463 D SsBaseTemplateCard: Passed-in item info is null
+06-29 09:43:50.921  1463  1463 D SsBaseTemplateCard: Passed-in item info is null
+06-29 09:43:50.921  1463  1463 D SsBaseTemplateCard: Passed-in item info is null
+06-29 09:43:50.921  1463  1463 I SsBaseTemplateCard: Secondary card pane is null
+06-29 09:43:50.921   735  1120 I ConnectivityService: Update capabilities for net 101 : -FOREGROUND
+06-29 09:43:50.930   735  1473 W ProcessStats: Tracking association SourceState{d3e12a6 system/1000 ImpBg #6000} whose proc state 6 is better than process ProcessState{ae31bd4 com.google.android.googlequicksearchbox:search/10147 pkg=com.google.android.googlequicksearchbox} proc state 14 (2 skipped)
+06-29 09:43:50.933  1206  2152 V WindowManagerShell: onTransitionReady(transaction=3156800963181)
+06-29 09:43:50.933  1206  1277 V WindowManagerShell: onTransitionReady (#22) android.os.BinderProxy@24385cb: {id=22 t=CLOSE f=0x10 trk=0 r=[0@Point(0, 0)] c=[
+06-29 09:43:50.933  1206  1277 V WindowManagerShell:         {m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xb21d466 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:50.933  1206  1277 V WindowManagerShell:         {m=CLOSE f=NONE leash=Surface(name=Task=9)/@0x902b3a7 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:50.933  1206  1277 V WindowManagerShell:         {m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0x30d9054 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}
+06-29 09:43:50.933  1206  1277 V WindowManagerShell:     ]}
+06-29 09:43:50.936  1206  1277 V WindowManagerShell: Playing animation for (#22) android.os.BinderProxy@24385cb@0
+06-29 09:43:50.938  1206  1277 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+06-29 09:43:50.938  1206  1277 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=22 t=CLOSE f=0x10 trk=0 r=[0@Point(0, 0)] c=[{m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xb21d466 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},{m=CLOSE f=NONE leash=Surface(name=Task=9)/@0x902b3a7 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},{m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0x30d9054 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}]}
+06-29 09:43:50.938  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=undefined independent=true modes=[CLOSE,TO_BACK] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=null launchCookie=null taskFragmentToken=android.os.BinderProxy@da608cc windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@281715, appThread = android.app.IApplicationThread$Stub$Proxy@7586a2a, debugName = overlayBackTransition }}
+06-29 09:43:50.940  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@77a301b, appThread = android.app.IApplicationThread$Stub$Proxy@990e5b8, debugName = LauncherToDream }}
+06-29 09:43:50.940  1206  1277 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@d000f91, appThread = android.app.IApplicationThread$Stub$Proxy@8eafef6, debugName = QuickstepLaunchHome }}
+06-29 09:43:50.941  1206  1277 D RemoteTransitionHandler: Found filterPair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@d000f91, appThread = android.app.IApplicationThread$Stub$Proxy@8eafef6, debugName = QuickstepLaunchHome }}
+06-29 09:43:50.942  1206  1277 V WindowManagerShell:  Delegate animation for (#22) to RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@d000f91, appThread = android.app.IApplicationThread$Stub$Proxy@8eafef6, debugName = QuickstepLaunchHome }
+06-29 09:43:50.944   735   760 V WindowManager: Sent Transition (#22) createdAt=06-29 09:43:50.721 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=9 effectiveUid=10214 displayId=0 isRunning=true baseIntent=Intent { flg=0x10000000 cmp=com.dabber/.MainActivity } baseActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} topActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} origActivity=null realActivity=ComponentInfo{com.dabber/com.dabber.MainActivity} numActivities=1 lastActiveTime=648091 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{93b870d Task{a16914f #9 type=standard A=10214:com.dabber}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 0 - 0, 0) topActivityInfo=ActivityInfo{28ca6c2 com.dabber.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(321, 784 - 951, 2056) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 0 - 1272, 2772) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 16, debugId = 22 }
+06-29 09:43:50.951   735   760 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+06-29 09:43:50.951   735   760 V WindowManager:     info={id=22 t=CLOSE f=0x10 trk=0 r=[0@Point(0, 0)] c=[
+06-29 09:43:50.951   735   760 V WindowManager:         {WCT{RemoteToken{64c2229 Task{fd959ff #1 type=home}}} m=TO_FRONT f=SHOW_WALLPAPER|MOVE_TO_TOP leash=Surface(name=Task=1)/@0xf18a9ab sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:50.951   735   760 V WindowManager:         {WCT{RemoteToken{93b870d Task{a16914f #9 type=standard A=10214:com.dabber}}} m=CLOSE f=NONE leash=Surface(name=Task=9)/@0xabda437 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0 taskParent=-1},
+06-29 09:43:50.951   735   760 V WindowManager:         {m=TO_FRONT f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{1dd15a8 showWhenLocked=false})/@0xafdf225 sb=Rect(0, 0 - 1272, 2772) eb=Rect(0, 0 - 1272, 2772) epz=Point(1272, 2772) d=0}
+06-29 09:43:50.951   735   760 V WindowManager:     ]}
+06-29 09:43:50.952  1206  1277 V WindowManagerShell:  animated by com.android.wm.shell.transition.RemoteTransitionHandler@e20c9ab
+06-29 09:43:50.953   521   556 I netd    : networkSetPermissionForNetwork(101, 1) <31.25ms>
+06-29 09:43:50.954   735  1120 W IPCThreadState: Sending oneway calls to frozen process.
+06-29 09:43:50.956   735  1120 W IPCThreadState: Sending oneway calls to frozen process.
+06-29 09:43:50.957   735  1120 W IPCThreadState: Sending oneway calls to frozen process.
+06-29 09:43:50.960  1463  1463 D StateManager: createAtomicAnimation - fromState: Background, toState: Normal, partial trace:
+06-29 09:43:50.960  1463  1463 D StateManager: 	at com.android.quickstep.util.ScalingWorkspaceRevealAnim.<init>(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:39)
+06-29 09:43:50.960  1463  1463 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager.createWallpaperOpenAnimations(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:168)
+06-29 09:43:50.960  1463  1463 D StateManager: 	at com.android.launcher3.QuickstepTransitionManager$WallpaperOpenLauncherAnimationRunner.onAnimationStart(go/retraceme 5a544d9e8fb14194a69e2b7a778e7e5394990cdcfcf28c73553bb75ca978b9e9:17)
+06-29 09:43:50.961  1463  1463 D b/311077782: LauncherAnimationRunner.setAnimation
+06-29 09:43:50.969  1463  1491 I s.nexuslauncher: AssetManager2(0x741caba56a58) locale list changing from [] to [en-US]
+06-29 09:43:50.978   735   867 I ImeTracker: com.google.android.apps.nexuslauncher:32f90c46: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+06-29 09:43:50.994  1668  1668 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043 
+06-29 09:43:50.996  1668  1668 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+06-29 09:43:50.996   735  1926 I ImeTracker: system_server:90ce5af0: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+06-29 09:43:51.000  1668  1668 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.google.android.apps.nexuslauncher, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: EmojiCompatManager.getEmojiCompatIfLoaded():343 EmojiCompat.init() was never called.
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: java.lang.IllegalStateException: EmojiCompat is not initialized. Please call EmojiCompat.init() first
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at asx.p(PG:6)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at axb.b(PG:13)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at jnr.b(PG:2)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at jnr.c(PG:4)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at jnr.f(PG:3)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at jnx.c(PG:3)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at kif.cz(PG:47)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at lhl.run(PG:1025)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at jaf.execute(PG:12)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at nco.v(PG:13)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at lhn.m(PG:96)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at lhn.k(PG:25)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at kgn.onStartInput(PG:250)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService.doStartInput(InputMethodService.java:3521)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.startInput(InputMethodService.java:879)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.dispatchStartInput(InputMethodService.java:908)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at android.inputmethodservice.IInputMethodWrapper.executeMessage(IInputMethodWrapper.java:201)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at android.os.Handler.dispatchMessage(Handler.java:110)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at android.os.Looper.loopOnce(Looper.java:248)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at android.os.Looper.loop(Looper.java:338)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at java.lang.reflect.Method.invoke(Native Method)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+06-29 09:43:51.001  1668  1668 I EmojiCompatManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+06-29 09:43:51.003  1668  1668 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+06-29 09:43:51.003   735   765 W ActivityTaskManager: Unable to send transaction to client proc com.dabber: no app thread
+06-29 09:43:51.004   735   764 I ImeTracker: system_server:90ce5af0: onCancelled at PHASE_SERVER_SHOULD_HIDE
+06-29 09:43:51.002  6272  6272 I avrd    : (REDACTED) Starting %s background task %s.
+06-29 09:43:51.006  1463  1463 D InsetsController: hide(ime(), fromIme=false)
+06-29 09:43:51.007  1463  1463 I ImeTracker: com.google.android.apps.nexuslauncher:32f90c46: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+06-29 09:43:51.009   735  2077 W PackageConfigPersister: App-specific configuration not found for packageName: com.google.android.apps.nexuslauncher and userId: 0
+06-29 09:43:51.017   598   598 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+06-29 09:43:51.040   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:43:51.040   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:43:51.040   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:43:51.040   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:43:51.041   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:51.041   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:51.041   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:51.041  6272  6989 I aukg    : Using pair HTTP connection
+06-29 09:43:51.042   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:51.042   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:51.042   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:51.042   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:51.042   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:51.044   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:43:51.045   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:43:51.045   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:43:51.046   735  2078 I WifiService: getWifiEnabledState uid=10147 state=3
+06-29 09:43:51.046   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3015] from screen [on:0 period:314803206] score=60
+06-29 09:43:51.054  6272  6392 I abhp    : [Upload] Connected
+06-29 09:43:51.057  6272  6302 W acte    : Account id is not cached
+06-29 09:43:51.074  6272  6392 I aukg    : Using pair HTTP connection
+06-29 09:43:51.075  6272  6272 E rdv     : onError
+06-29 09:43:51.075  6272  6272 E rdv     : afvv: errorCode: 65561, engine: 2
+06-29 09:43:51.075  6272  6272 E rdv     : 	at auki.a(PG:23)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at abhl.hv(PG:13)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at fyqd.e(PG:9)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at ahbi.d(PG:154)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at ahbi.iW(PG:26)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at abhm.c(PG:102)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at abhn.run(PG:1)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:524)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at java.util.concurrent.FutureTask.run(FutureTask.java:317)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at aggv.run(PG:20)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at aght.run(PG:3)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at aght.run(PG:3)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1156)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:651)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at java.lang.Thread.run(Thread.java:1119)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at aggj.run(PG:42)
+06-29 09:43:51.075  6272  6272 E rdv     : Caused by: afvx: errorCode: 65586, engine: 2
+06-29 09:43:51.075  6272  6272 E rdv     : 	at abhl.hv(PG:6)
+06-29 09:43:51.075  6272  6272 E rdv     : 	... 14 more
+06-29 09:43:51.075  6272  6272 E rdv     : Caused by: afvt: errorCode: 401, engine: 2
+06-29 09:43:51.075  6272  6272 E rdv     : 	at rds.b(PG:30)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at abii.hJ(PG:11)
+06-29 09:43:51.075  6272  6272 E rdv     : 	at ahbi.d(PG:129)
+06-29 09:43:51.075  6272  6272 E rdv     : 	... 12 more
+06-29 09:43:51.077   735  2078 I WifiService: getWifiEnabledState uid=10147 state=3
+06-29 09:43:51.116   735  1926 I WifiService: getWifiEnabledState uid=10147 state=3
+06-29 09:43:51.124  6272  6299 W dncx    : Upload request without a content type.
+06-29 09:43:51.126  6272  6393 I abhp    : [Upload] Connected
+06-29 09:43:51.133  6272  6272 W qrh     : Failed to sync device settings.
+06-29 09:43:51.134  6272  6272 I qrh     : Retrying to sync device settings.
+06-29 09:43:51.145  6272  6272 W JobInfo : Job 'com.google.android.googlequicksearchbox/com.google.android.apps.gsa.tasks.BackgroundTasksJobService#-353' has a deadline with functional constraints and an extremely short time window of 0 ms (delay=480000, deadline=480000). The functional constraints are not likely to be satisfied when the job runs.
+06-29 09:43:51.146   735  2077 W JobInfo : Job 'com.google.android.googlequicksearchbox/com.google.android.apps.gsa.tasks.BackgroundTasksJobService#-353' has a deadline with functional constraints and an extremely short time window of 0 ms (delay=480000, deadline=480000). The functional constraints are not likely to be satisfied when the job runs.
+06-29 09:43:51.150   735  2077 W JobInfo : Job 'com.google.android.googlequicksearchbox/com.google.android.apps.gsa.tasks.BackgroundTasksJobService#-353' has a deadline with functional constraints and an extremely short time window of 0 ms (delay=480000, deadline=480000). The functional constraints are not likely to be satisfied when the job runs.
+06-29 09:43:51.164   735  2078 W JobScheduler: Job didn't exist in JobStore: b01000d #u0a147/-353 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.tasks.BackgroundTasksJobService
+06-29 09:43:51.981  1463  1463 D ScalingWorkspaceRevealAnim: alpha of workspace at the end of animation: 1.0
+06-29 09:43:52.020  1206  1277 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#22) android.os.BinderProxy@24385cb@0
+06-29 09:43:52.024   735   760 V WindowManager: Finish Transition (#22): created at 06-29 09:43:50.721 collect-started=0.068ms request-sent=0.156ms started=10.839ms ready=109.592ms sent=210.181ms commit=29.034ms finished=1301.576ms
+06-29 09:43:52.026   735  1473 E IPCThreadState: Binder transaction failure. id: 371636, BR_*: 29189, error: -22 (Invalid argument)
+06-29 09:43:52.001     0     0 I binder  : 1473:735 cannot find target node
+06-29 09:43:52.002     0     0 I binder  : 735:1473 transaction async to 0:0 failed 371636/29189/-22, size 64-0 line 3348
+06-29 09:43:52.028   735  1473 W ActivityManager: pid 735 system sent binder code 7 with flags 1 to frozen apps and got error -32
+06-29 09:43:52.028   735  1473 D ActivityManager: Too many transaction errors, throttling freezer binder callback.
+06-29 09:43:52.029   735  1473 W WindowManager: Exception thrown during dispatchAppVisibility Window{6eeae22 u0 com.dabber/com.dabber.MainActivity EXITING}
+06-29 09:43:52.029   735  1473 W WindowManager: android.os.DeadObjectException
+06-29 09:43:52.029   735  1473 W WindowManager: 	at android.os.BinderProxy.transactNative(Native Method)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at android.os.BinderProxy.transact(BinderProxy.java:592)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at android.view.IWindow$Stub$Proxy.dispatchAppVisibility(IWindow.java:557)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.WindowState.sendAppVisibilityToClients(WindowState.java:3151)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.WindowContainer.sendAppVisibilityToClients(WindowContainer.java:1311)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.WindowToken.setClientVisible(WindowToken.java:389)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.ActivityRecord.setClientVisible(ActivityRecord.java:6650)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.ActivityRecord.commitVisibility(ActivityRecord.java:5561)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.Transition.finishTransition(Transition.java:1391)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.TransitionController.finishTransition(TransitionController.java:1029)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.finishTransition(WindowOrganizerController.java:496)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at android.window.IWindowOrganizerController$Stub.onTransact(IWindowOrganizerController.java:261)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.onTransact(WindowOrganizerController.java:223)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at android.os.Binder.execTransactInternal(Binder.java:1421)
+06-29 09:43:52.029   735  1473 W WindowManager: 	at android.os.Binder.execTransact(Binder.java:1365)
+06-29 09:43:52.029   735  1473 W Process : Unable to open /proc/6957/status
+06-29 09:43:52.043  1206  1277 V WindowManagerShell: Track 0 became idle
+06-29 09:43:52.043  1206  1277 V WindowManagerShell: All active transition animations finished
+06-29 09:43:52.082   598   598 E BpTransactionCompletedListener: Failed to transact (-32)
+06-29 09:43:52.095  1463  1463 D RecentsView: onTaskRemoved: 9, not handling task stack changes
+06-29 09:43:52.095  1463  1463 D RecentsView: onTaskRemoved: 9, not handling task stack changes
+06-29 09:43:52.375   735   750 I system_server: NativeAlloc concurrent mark compact GC freed 19MB AllocSpace bytes, 115(2296KB) LOS objects, 45% free, 29MB/53MB, paused 1.833ms,1.482ms total 242.379ms
+06-29 09:43:52.799  1398  1648 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+06-29 09:43:53.094   735  1473 I WifiService: getWifiEnabledState uid=10147 state=3
+06-29 09:43:53.096   735  1473 D ConnectivityService: requestNetwork for uid/pid:10147/6272 activeRequest: null callbackRequest: 217 [NetworkRequest [ REQUEST id=217, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED&NOT_BANDWIDTH_CONSTRAINED Uid: 10147 RequestorUid: 10147 RequestorPkg: com.google.android.googlequicksearchbox UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647 isUidTracked: false declaredMethods: AVAIL|LOSING|LOST|NC|LP
+06-29 09:43:53.099   521   556 I netd    : networkSetPermissionForNetwork(101, 0) <1.95ms>
+06-29 09:43:53.100   735  1120 W IPCThreadState: Sending oneway calls to frozen process.
+06-29 09:43:53.101   735  1120 W IPCThreadState: Sending oneway calls to frozen process.
+06-29 09:43:53.101   735  1120 W IPCThreadState: Sending oneway calls to frozen process.
+06-29 09:43:53.102   735  1120 D ConnectivityService: NetReassign [217 : null → 101] [c 0] [a 5] [i 0]
+06-29 09:43:53.103   735  1120 D ConnectivityService: reportNetworkConnectivity(100, false) by 10147
+06-29 09:43:53.103  1321  2019 D NetworkMonitor/100: Forcing reevaluation for UID 10147. Dns signal count: 0
+06-29 09:43:53.110   521  6998 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+06-29 09:43:53.112   521  6999 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+06-29 09:43:53.113   521  7000 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+06-29 09:43:53.115   521  6998 I resolv  : res_nsend: used send_dg 75 terrno: 0
+06-29 09:43:53.115   521  7001 I resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+06-29 09:43:53.116   521  7001 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7b743fe68370
+06-29 09:43:53.118   521  6999 I resolv  : res_nsend: used send_dg 256 terrno: 0
+06-29 09:43:53.119   521  7000 I resolv  : res_nsend: used send_dg 63 terrno: 0
+06-29 09:43:53.133  1321  6996 D NetworkMonitor/100: PROBE_DNS www.google.com 28ms OK 142.251.155.119,142.251.151.119,142.251.157.119,142.251.150.119,142.251.153.119,142.251.152.119,142.251.156.119,142.251.154.119,2001:4860:482c:7700::,2001:4860:4826:7700::,2001:4860:4828:7700::,2001:4860:482a:7700::,2001:4860:4829:7700::,2001:4860:482b:7700::,2001:4860:4827:7700::,2001:4860:482d:7700::
+06-29 09:43:53.135  1321  6997 D NetworkMonitor/100: PROBE_DNS connectivitycheck.gstatic.com 30ms OK 142.250.75.163,2a00:1450:4028:804::2003
+06-29 09:43:53.136   521  7002 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+06-29 09:43:53.137   521  7003 I resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+06-29 09:43:53.137   521  7004 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+06-29 09:43:53.137   521  7005 I resolv  : res_nmkquery: (QUERY, IN, A)
+06-29 09:43:53.137   521  7004 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7b73dfe64f90
+06-29 09:43:53.137   521  7004 I resolv  : doQuery: rcode=0, ancount=8, return value=256
+06-29 09:43:53.137   521  7005 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7b743fe68370
+06-29 09:43:53.138   521  7005 I resolv  : doQuery: rcode=0, ancount=8, return value=160
+06-29 09:43:53.139   521  7006 I resolv  : res_nmkquery: (QUERY, IN, AAAA)
+06-29 09:43:53.139   521  7006 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7b739fe5b710
+06-29 09:43:53.139   521  7006 I resolv  : doQuery: rcode=0, ancount=1, return value=75
+06-29 09:43:53.139   521  7007 I resolv  : res_nmkquery: (QUERY, IN, A)
+06-29 09:43:53.140   521  7007 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7b739fe5b550
+06-29 09:43:53.140   521  7007 I resolv  : doQuery: rcode=0, ancount=1, return value=63
+06-29 09:43:53.156  1321  6997 D NetworkMonitor/100: PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 time=20ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Mon, 29 Jun 2026 09:43:54 GMT], X-Android-Received-Millis=[1782726233155], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1782726233150]}
+06-29 09:43:53.220  1321  6996 D NetworkMonitor/100: PROBE_HTTPS https://www.google.com/generate_204 time=84ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Alt-Svc=[h3=":443"; ma=2592000,h3-29=":443"; ma=2592000], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Mon, 29 Jun 2026 09:43:54 GMT], X-Android-Received-Millis=[1782726233219], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1782726233214]}
+06-29 09:43:53.221  1321  6995 D NetworkMonitor/100: isCaptivePortal: isSuccessful()=true isPortal()=false RedirectUrl=null isPartialConnectivity()=false Time=117ms
+06-29 09:43:53.224   735  1120 D ConnectivityService: [100 WIFI] validation passed
+06-29 09:43:54.058   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:43:54.058   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:43:54.058   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:43:54.059   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:43:54.059   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:54.059   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:54.060   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:54.060   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:54.060   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:54.061   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:54.061   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:54.061   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:54.062   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:43:54.062   735  1114 D WifiScoreCard: txRate: 7 txSpeed: 2
+06-29 09:43:54.062   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed 2
+06-29 09:43:54.062   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=6.5, 0.0, 0.0 rx=6.3 bcn=0 [on:0 tx:0 rx:0 period:3016] from screen [on:0 period:314806222] score=60
+06-29 09:43:54.818  6272  6389 W abht    : (REDACTED) [%s] response code: %d
+06-29 09:43:55.046   735  3154 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+06-29 09:43:57.069   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:43:57.070   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:43:57.070   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:43:57.070   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:43:57.071   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:57.071   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:57.071   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:57.071   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:57.071   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:57.071   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:57.072   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:43:57.072   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:43:57.072   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:43:57.072   735  1114 D WifiScoreCard: txRate: 4 txSpeed: 1
+06-29 09:43:57.073   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed 1
+06-29 09:43:57.073   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=3.6, 0.0, 0.0 rx=3.5 bcn=0 [on:0 tx:0 rx:0 period:3010] from screen [on:0 period:314809233] score=60
+06-29 09:43:58.286   735  2078 D OomAdjuster: Not killing cached processes
+06-29 09:44:00.098   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:44:00.098   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:00.099   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:00.099   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:00.099   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:00.099   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:00.099   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:00.101   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:00.102   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:00.102   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:00.103   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:00.103   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:00.104   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:00.104   735  1114 D WifiScoreCard: txRate: 2 txSpeed: 2
+06-29 09:44:00.105   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:00.105   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=1.3, 0.0, 0.0 rx=1.3 bcn=0 [on:0 tx:0 rx:0 period:3032] from screen [on:0 period:314812265] score=60
+06-29 09:44:01.217   735   847 D ActivityManager: freezing 6272 com.google.android.googlequicksearchbox:search
+06-29 09:44:02.812  1398  1648 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+06-29 09:44:03.113   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:44:03.114   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:03.114   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:03.114   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:03.114   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:03.115   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:03.115   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:03.115   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:03.115   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:03.115   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:03.115   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:03.115   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:03.116   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:03.116   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 2
+06-29 09:44:03.116   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:03.117   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=0.4, 0.0, 0.0 rx=0.4 bcn=0 [on:0 tx:0 rx:0 period:3000] from screen [on:0 period:314815277] score=60
+06-29 09:44:03.457  1789  1846 D PickerSyncController: Attempting to enable cloud media queries.
+06-29 09:44:03.457  1789  1846 D PickerSyncLockManager: Trying to acquire lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@60a7587[Unlocked]. Lock Name = CLOUD_SYNC_LOCK. Threads that may be waiting to acquire this lock = [] with timeout.
+06-29 09:44:03.458  1789  1846 D CloseableReentrantLock: Successfully acquired lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@60a7587[Locked by thread com.android.providers.media.internal.modules.utils.BackgroundThread]. Lock Name = CLOUD_SYNC_LOCK. Threads that may be waiting to acquire this lock = []
+06-29 09:44:03.458  1789  1846 D PickerSyncLockManager: Trying to acquire lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@1919798[Unlocked]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = [] with timeout.
+06-29 09:44:03.458  1789  1846 D CloseableReentrantLock: Successfully acquired lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@1919798[Locked by thread com.android.providers.media.internal.modules.utils.BackgroundThread]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+06-29 09:44:03.458  1789  1846 D CloseableReentrantLock: Successfully released lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@1919798[Unlocked]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+06-29 09:44:03.458  1789  1846 D PickerSyncLockManager: Trying to acquire lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@1919798[Unlocked]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = [] with timeout.
+06-29 09:44:03.459  1789  1846 D CloseableReentrantLock: Successfully acquired lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@1919798[Locked by thread com.android.providers.media.internal.modules.utils.BackgroundThread]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+06-29 09:44:03.459  1789  1846 D PickerSyncController: getSyncRequestParams() CLOUD, auth=com.google.android.apps.photos.cloudpicker
+06-29 09:44:03.460   735  1473 D OomAdjuster: Not killing cached processes
+06-29 09:44:03.463   735  1473 D ActivityManager: sync unfroze 6654 com.google.android.apps.photos for 7
+06-29 09:44:03.464   735  1166 D BackgroundInstallControlService: Package event received: 0
+06-29 09:44:03.467  6654  7008 W libc    : Access denied finding property "ro.debuggable"
+06-29 09:44:03.467  1789  1846 D PickerSyncController:    Latest ID/Gen=null/0
+06-29 09:44:03.468  1789  1846 D PickerSyncController:    Cached ID/Gen=null/-1
+06-29 09:44:03.468  1789  1846 D CloseableReentrantLock: Successfully released lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@1919798[Unlocked]. Lock Name = CLOUD_PROVIDER_LOCK. Threads that may be waiting to acquire this lock = []
+06-29 09:44:03.468  1789  1846 D CloseableReentrantLock: Successfully released lock com.android.providers.media.photopicker.sync.CloseableReentrantLock@60a7587[Unlocked]. Lock Name = CLOUD_SYNC_LOCK. Threads that may be waiting to acquire this lock = []
+06-29 09:44:03.468  1789  1846 D PickerSyncController: Error occurred, remaining retry count: 0
+06-29 09:44:03.468  1789  1846 D PickerSyncController: java.lang.IllegalStateException: Unexpected Latest Media Collection Info: ID/Gen=null/0
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at com.android.providers.media.photopicker.PickerSyncController.getSyncRequestParamsLocked(PickerSyncController.java:1554)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at com.android.providers.media.photopicker.PickerSyncController.getSyncRequestParams(PickerSyncController.java:1514)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at com.android.providers.media.photopicker.PickerSyncController.maybeEnableCloudMediaQueries(PickerSyncController.java:355)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at com.android.providers.media.photopicker.PickerSyncController.lambda$tryEnablingCloudMediaQueries$0(PickerSyncController.java:286)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at com.android.providers.media.photopicker.PickerSyncController.$r8$lambda$igHbLHRBgFxI5G0Bp5TN28PcQJ4(PickerSyncController.java:0)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at com.android.providers.media.photopicker.PickerSyncController$$ExternalSyntheticLambda1.run(R8$$SyntheticClass:0)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at android.os.Handler.handleCallback(Handler.java:995)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at android.os.Handler.dispatchMessage(Handler.java:103)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at android.os.Looper.loopOnce(Looper.java:248)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at android.os.Looper.loop(Looper.java:338)
+06-29 09:44:03.468  1789  1846 D PickerSyncController: 	at android.os.HandlerThread.run(HandlerThread.java:85)
+06-29 09:44:03.460  6654  6654 W binder:6654_5: type=1400 audit(0.0:63): avc:  denied  { read } for  name="u:object_r:userdebug_or_eng_prop:s0" dev="tmpfs" ino=375 scontext=u:r:untrusted_app:s0:c160,c256,c512,c768 tcontext=u:object_r:userdebug_or_eng_prop:s0 tclass=file permissive=0 app=com.google.android.apps.photos
+06-29 09:44:03.522   521   556 I netd    : tetherGetStats() -> {[]} <0.64ms>
+06-29 09:44:06.125   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:44:06.125   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:06.126   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:06.126   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:06.126   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:06.126   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:06.127   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:06.127   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:06.127   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:06.127   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:06.128   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:06.128   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:06.129   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:06.129   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 2
+06-29 09:44:06.129   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:06.129   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=0.1, 0.0, 0.0 rx=0.1 bcn=0 [on:0 tx:0 rx:0 period:3012] from screen [on:0 period:314818289] score=60
+06-29 09:44:09.140   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:44:09.141   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:09.141   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:09.141   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:09.141   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:09.142   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:09.142   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:09.142   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:09.142   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:09.142   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:09.143   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:09.143   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:09.143   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:09.144   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 2
+06-29 09:44:09.144   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:09.144   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3015] from screen [on:0 period:314821304] score=60
+06-29 09:44:09.500   735   769 D OomAdjuster: Not killing cached processes
+06-29 09:44:09.562   521   556 I netd    : tetherGetStats() -> {[]} <0.72ms>
+06-29 09:44:12.118  1184  1184 I ot-daemon: [INFO]-UTILS---: Try to push threadnetwork ATOMs.
+06-29 09:44:12.118  1184  1184 W ot-daemon: [WARN]-UTILS---: Some telemetries are not populated
+06-29 09:44:12.119  1184  1184 I ot-daemon: [INFO]-UTILS---: Pushed threadnetwork ATOMs.
+06-29 09:44:12.150   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:44:12.150   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:12.151   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:12.151   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:12.151   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:12.152   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:12.152   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:12.152   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:12.152   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:12.153   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:12.153   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:12.153   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:12.153   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:12.154   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 2
+06-29 09:44:12.154   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:12.154   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3009] from screen [on:0 period:314824314] score=60
+06-29 09:44:12.824  1398  1648 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+06-29 09:44:14.507   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-29 09:44:14.508   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-29 09:44:14.508   735  1120 D InetDiagMessage: Destroyed live tcp sockets for uids={10160} in 2ms
+06-29 09:44:14.509   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-29 09:44:14.510   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-29 09:44:14.510   735  1120 D InetDiagMessage: Destroyed live tcp sockets for uids={20160} in 2ms
+06-29 09:44:15.162   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:44:15.162   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:15.162   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:15.163   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:15.163   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:15.163   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:15.163   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:15.163   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:15.164   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:15.164   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:15.164   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:15.164   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:15.164   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:15.164   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 2
+06-29 09:44:15.165   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:15.165   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3010] from screen [on:0 period:314827325] score=60
+06-29 09:44:18.171   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:44:18.171   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:18.172   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:18.172   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:18.172   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:18.172   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:18.172   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:18.173   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:18.173   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:18.173   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:18.173   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:18.173   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:18.174   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:18.174   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 2
+06-29 09:44:18.174   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:18.175   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3010] from screen [on:0 period:314830335] score=60
+06-29 09:44:18.531   735  1473 D OomAdjuster: Not killing cached processes
+06-29 09:44:21.180   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=2 freq=2447 RxLinkSpeed=2
+06-29 09:44:21.180   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:21.180   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:21.181   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:21.181   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:21.181   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:21.181   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:21.182   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:21.182   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:21.182   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:21.182   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:21.182   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:21.183   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 2Mbps, Tx Link speed: 2Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:21.183   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 2
+06-29 09:44:21.183   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:21.183   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=2 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3008] from screen [on:0 period:314833343] score=60
+06-29 09:44:22.550  1462  1462 D wpa_supplicant: WNM: Send keep-alive to AP 00:13:10:85:fe:01
+06-29 09:44:22.831  1398  1648 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+06-29 09:44:24.190   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:44:24.190   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:24.190   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:24.191   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:24.191   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:24.191   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:24.191   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:24.192   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:24.192   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:24.192   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:24.192   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:24.192   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:24.193   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:24.193   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:44:24.193   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:24.193   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3009] from screen [on:0 period:314836353] score=60
+06-29 09:44:27.208   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:44:27.208   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:27.208   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:27.208   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:27.208   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:27.208   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:27.208   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:27.208   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:27.209   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:27.209   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:27.209   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:27.209   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:27.210   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:27.210   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:44:27.210   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:27.210   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3016] from screen [on:0 period:314839370] score=60
+06-29 09:44:29.577   521   556 I netd    : tetherGetStats() -> {[]} <0.61ms>
+06-29 09:44:30.216   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:44:30.216   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:30.217   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:30.217   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:30.217   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:30.217   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:30.218   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:30.218   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:30.218   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:30.219   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:30.219   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:30.219   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:30.220   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:30.220   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:44:30.220   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:30.220   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3009] from screen [on:0 period:314842380] score=60
+06-29 09:44:32.837  1398  1648 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+06-29 09:44:33.227   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:44:33.228   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:33.228   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:33.228   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:33.229   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:33.229   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:33.229   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:33.230   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:33.230   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:33.230   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:33.230   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:33.230   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:33.231   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:33.231   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:44:33.231   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:33.232   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3012] from screen [on:0 period:314845392] score=60
+06-29 09:44:33.696  1858  2347 I bbax    : (REDACTED) getHotwordActive::active query: %s, watch: %s, devices connected: %s
+06-29 09:44:36.237   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:44:36.237   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:36.237   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:36.237   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:36.238   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:36.238   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:36.238   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:36.238   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:36.238   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:36.238   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:36.238   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:36.239   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:36.239   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:36.239   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:44:36.240   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:36.240   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3008] from screen [on:0 period:314848400] score=60
+06-29 09:44:39.249   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:44:39.249   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:39.250   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:39.250   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:39.250   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:39.250   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:39.251   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:39.251   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:39.251   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:39.251   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:39.251   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:39.251   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:39.252   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:39.252   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:44:39.253   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:39.253   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3013] from screen [on:0 period:314851413] score=60
+06-29 09:44:39.529   735   847 D ActivityManager: freezing 6654 com.google.android.apps.photos
+06-29 09:44:39.532   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+06-29 09:44:39.533   735  1120 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+06-29 09:44:39.533   735  1120 D InetDiagMessage: Destroyed live tcp sockets for uids={10160} in 3ms
+06-29 09:44:42.259   735  1114 D WifiClientModeImpl[78975:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2447 RxLinkSpeed=2
+06-29 09:44:42.259   735  1114 D WifiDataStall: tx tput in kbps: 11000
+06-29 09:44:42.260   735  1114 D WifiDataStall: rx tput in kbps: 11000
+06-29 09:44:42.260   735  1114 V WifiConfigManager: Updating scan detail cache freq=2447 BSSID=00:13:10:85:fe:01 RSSI=-50 for "AndroidWifi"NONE
+06-29 09:44:42.260   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:42.260   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:42.261   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:42.261   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:42.261   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:42.261   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:42.261   735  1114 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+06-29 09:44:42.262   735  1114 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 11
+06-29 09:44:42.262   735  1114 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 2076487524 SSID: "AndroidWifi", BSSID: 00:13:10:85:fe:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 11Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 11Mbps, Frequency: 2447MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+06-29 09:44:42.262   735  1114 D WifiScoreCard: txRate: 1 txSpeed: 1
+06-29 09:44:42.262   735  1114 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 443710621 RSSI -50 txSpeed -1
+06-29 09:44:42.263   735  1114 D WifiClientModeImpl[78975:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 00:13:10:85:fe:01 rssi=-50 f=2447 sc=60 link=1 tx=0.0, 0.0, 0.0 rx=0.0 bcn=0 [on:0 tx:0 rx:0 period:3010] from screen [on:0 period:314854423] score=60
+06-29 09:44:42.839  1398  1648 D SatelliteController: iisInCarrierRoamingNbIotNtn: satellite is disabled
+06-29 09:44:43.709   735   780 I WifiService: isFeatureSupported uid=1000 returns [WIFI_FEATURE_INFRA, WIFI_FEATURE_P2P, WIFI_FEATURE_MOBILE_HOTSPOT, WIFI_FEATURE_WPA3_SAE, WIFI_FEATURE_WPA3_SUITE_B, WIFI_FEATURE_OWE, WIFI_FEATURE_DPP, WIFI_FEATURE_AP_RAND_MAC, WIFI_FEATURE_MBO, WIFI_FEATURE_FILS_SHA256, WIFI_FEATURE_FILS_SHA384, WIFI_FEATURE_SAE_PK, WIFI_FEATURE_DPP_ENROLLEE_RESPONDER, WIFI_FEATURE_PASSPOINT_TERMS_AND_CONDITIONS, WIFI_FEATURE_WFD_R2, WIFI_FEATURE_DECORATED_IDENTITY, WIFI_FEATURE_TRUST_ON_FIRST_USE, WIFI_FEATURE_SET_TLS_MINIMUM_VERSION, WIFI_FEATURE_TLS_V1_3, WIFI_FEATURE_WEP, WIFI_FEATURE_WPA_PERSONAL]
+06-29 09:44:43.874     0     0 W healthd : battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+06-29 09:44:44.286     0     0 I logd    : logdr: UID=2000 GID=2000 PID=7009 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns

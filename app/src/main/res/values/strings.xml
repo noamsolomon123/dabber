@@ -13,6 +13,10 @@
     <string name="section_model">מודל</string>
     <string name="model_loaded">✓ מודל העברית נטען</string>
     <string name="model_missing">✗ המודל לא נמצא — יש להוריד או לדחוף אותו</string>
+    <string name="model_download">הורד מודל עברית (548MB)</string>
+    <string name="model_downloading">מוריד… %1$d%%</string>
+    <string name="model_done">המודל הותקן ✓</string>
+    <string name="model_failed">ההורדה נכשלה: %1$s</string>
 
     <string name="section_bubble">בועה צפה</string>
     <string name="bubble_start">הפעל בועה צפה</string>

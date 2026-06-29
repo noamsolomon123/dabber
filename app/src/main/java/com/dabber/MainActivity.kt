@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.text.InputType
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -19,8 +20,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.dabber.audio.AudioRecorder
+import com.dabber.audio.WavReader
 import com.dabber.core.DictationCore
 import com.dabber.model.ModelConfig
+import com.dabber.model.ModelDownloader
+import com.dabber.model.ModelStore
 import com.dabber.overlay.OverlayService
 import java.io.File
 
@@ -37,6 +41,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var overlayStatus: TextView
     private lateinit var a11yStatus: TextView
     private lateinit var modelStatus: TextView
+    private lateinit var modelProgress: TextView
+    private lateinit var downloadBtn: Button
     private lateinit var bubbleBtn: Button
     private lateinit var dictateBtn: Button
     private lateinit var scratch: EditText
@@ -49,6 +55,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(buildUi())
+        intent?.getStringExtra("transcribe_wav")?.let { runDebugTranscription(it) }
     }
 
     override fun onResume() {
@@ -84,6 +91,10 @@ class MainActivity : AppCompatActivity() {
         col.addView(header(getString(R.string.section_model)))
         modelStatus = label("")
         col.addView(modelStatus)
+        modelProgress = label("")
+        col.addView(modelProgress)
+        downloadBtn = button(getString(R.string.model_download)) { downloadModel() }
+        col.addView(downloadBtn)
 
         col.addView(header(getString(R.string.section_bubble)))
         bubbleBtn = button(getString(R.string.bubble_start)) { toggleBubble() }
@@ -120,6 +131,33 @@ class MainActivity : AppCompatActivity() {
 
         bubbleBtn.isEnabled = micOk && overlayOk && modelOk
         dictateBtn.isEnabled = micOk && modelOk
+        downloadBtn.visibility =
+            if (!modelOk && ModelConfig.hasRemoteSource) View.VISIBLE else View.GONE
+    }
+
+    private fun downloadModel() {
+        if (!ModelConfig.hasRemoteSource) return
+        downloadBtn.isEnabled = false
+        Thread {
+            try {
+                val f = ModelDownloader.ensure(
+                    this,
+                    ModelConfig.URL,
+                    ModelConfig.SHA256,
+                    ModelConfig.FILE_NAME,
+                ) { p -> runOnUiThread { modelProgress.text = getString(R.string.model_downloading, p) } }
+                DictationCore.loadModel(f.absolutePath)
+                runOnUiThread {
+                    modelProgress.text = getString(R.string.model_done)
+                    refresh()
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    modelProgress.text = getString(R.string.model_failed, e.message ?: "")
+                    downloadBtn.isEnabled = true
+                }
+            }
+        }.start()
     }
 
     private fun statusLine(labelRes: Int, ok: Boolean): String {
@@ -160,11 +198,33 @@ class MainActivity : AppCompatActivity() {
 
     private fun maybeLoadModel() {
         if (DictationCore.modelLoaded) return
-        val model = File(File(filesDir, "models"), ModelConfig.FILE_NAME)
+        val model = ModelStore.modelFile(this)
         if (!model.exists()) return
         Thread {
             DictationCore.loadModel(model.absolutePath)
             runOnUiThread { refresh() }
+        }.start()
+    }
+
+    /**
+     * Debug-only: transcribe a 16 kHz mono WAV and log the result. Triggered via
+     * `adb shell am start -n com.dabber/.MainActivity --es transcribe_wav <path>`.
+     * Used to validate the on-device engine against a known clip without live mic input.
+     */
+    private fun runDebugTranscription(path: String) {
+        Thread {
+            val model = ModelStore.modelFile(this)
+            val loaded = DictationCore.modelLoaded || DictationCore.loadModel(model.absolutePath)
+            Log.i(TAG, "model loaded=$loaded path=${model.absolutePath} exists=${model.exists()}")
+            if (!loaded) {
+                Log.e(TAG, "MODEL LOAD FAILED")
+                return@Thread
+            }
+            val pcm = WavReader.readPcm16Mono(File(path))
+            Log.i(TAG, "wav samples=${pcm.size}")
+            val t0 = System.currentTimeMillis()
+            val text = DictationCore.transcribeClean(pcm, ModelConfig.LANG)
+            Log.i(TAG, "TRANSCRIPT(${System.currentTimeMillis() - t0}ms): $text")
         }.start()
     }
 
@@ -220,4 +280,8 @@ class MainActivity : AppCompatActivity() {
     private fun toast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 
     private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
+
+    companion object {
+        private const val TAG = "DabberTest"
+    }
 }

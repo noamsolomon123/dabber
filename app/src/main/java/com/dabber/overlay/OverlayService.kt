@@ -28,6 +28,7 @@ import com.dabber.a11y.InsertionService
 import com.dabber.audio.AudioRecorder
 import com.dabber.core.DictationCore
 import com.dabber.model.ModelConfig
+import com.dabber.model.ModelStore
 import java.io.File
 import java.util.concurrent.Executors
 import kotlin.math.abs
@@ -62,7 +63,7 @@ class OverlayService : Service() {
         startAsForeground()
         addBubble()
         worker.execute {
-            val model = File(File(filesDir, "models"), ModelConfig.FILE_NAME)
+            val model = ModelStore.modelFile(this)
             if (model.exists()) DictationCore.loadModel(model.absolutePath)
             main.post { refreshBubble() }
         }
