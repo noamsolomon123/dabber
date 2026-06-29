@@ -1,0 +1,15 @@
+# build artifacts
+*.apk
+*.aab
+local.properties
+.gradle/
+build/
+*.keystore
+*.jks
+# python
+.venv/
+__pycache__/
+# models / audio (large, downloaded)
+models/*.bin
+models/*.gguf
+benchmark/data/
