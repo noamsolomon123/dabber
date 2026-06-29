@@ -64,15 +64,21 @@ class InsertionService : AccessibilityService() {
     override fun onDestroy() {
         if (instance === this) instance = null
         editableFocused = false
-        // Accessibility is now off — let the overlay fall back to always-visible.
+        // Accessibility is now off — the bubble can't insert text without us, so hide it.
         OverlayService.notifyEditableFocus(false)
         super.onDestroy()
     }
 
-    /** Recomputes [editableFocused] from the active window and notifies the overlay on change. */
+    /**
+     * Recomputes [editableFocused] from the active window and notifies the overlay on change.
+     *
+     * If the active window can't be read right now (transiently null during window transitions)
+     * we keep the last known state rather than reporting "no focus" — that avoids flicker where
+     * the bubble would briefly hide while a field is still focused.
+     */
     private fun evaluateEditableFocus() {
+        val root = rootInActiveWindow ?: return
         val editable = runCatching {
-            val root = rootInActiveWindow ?: return@runCatching false
             val node = root.findFocus(AccessibilityNodeInfo.FOCUS_INPUT)
             val result = node != null && node.isEditable
             @Suppress("DEPRECATION")

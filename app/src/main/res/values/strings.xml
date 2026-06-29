@@ -71,25 +71,36 @@
     <string name="bench_subtitle">מודד על הטלפון שלך כמה כל מודל מהיר ומדויק — על החומרה האמיתית</string>
     <string name="bench_back">חזרה</string>
 
-    <string name="bench_pick_title">בחר/י קוונטיזציה</string>
-    <string name="bench_pick_desc">כל קוונטיזציה מאזנת אחרת בין גודל, מהירות ודיוק.</string>
-    <string name="bench_warn">הרצת מודל מורידה אותו פעם אחת (453–834MB) ושומרת אותו במכשיר.</string>
-    <string name="bench_run">הרץ בנצ\'מרק</string>
-    <string name="bench_idle">בחר/י מודל והקש/י על \"הרץ בנצ\'מרק\"</string>
+    <!-- Benchmark: primary record-and-compare flow -->
+    <string name="bench_action_title">הקלט ובדוק את כל המודלים</string>
+    <string name="bench_action_desc">הקליטו את הקול שלכם — נריץ עליו את שלושת המודלים ונשווה מהירות ואיכות. הכול מקומי; הקול לא יוצא מהמכשיר.</string>
+    <string name="bench_record">🎤 הקלט ובדוק את כל המודלים</string>
+    <string name="bench_cpu_note">תמלול על CPU איטי — שדרוג NPU בדרך.</string>
+    <string name="bench_warn">בפעם הראשונה יורדו שלושת המודלים (כ‑1.8GB יחד) ונשמרים במכשיר. בפעמים הבאות זה מיידי.</string>
+    <string name="bench_wer">דיוק על קטעי עברית (WER)</string>
+
+    <string name="bench_idle">הקש/י על \"הקלט ובדוק את כל המודלים\" כדי להתחיל</string>
+    <string name="bench_recording">מקליט… דבר עכשיו</string>
+    <string name="bench_downloading">מוריד %1$s… %2$d%%</string>
+    <string name="bench_running_elapsed">מריץ %1$s… %2$d שנ׳</string>
     <string name="bench_preparing">מכין…</string>
     <string name="bench_done">הסתיים ✓</string>
     <string name="bench_failed">נכשל: %1$s</string>
+    <string name="bench_model_failed">נכשל: %1$s</string>
+
+    <!-- Benchmark: error reasons -->
+    <string name="bench_err_native">המעבד לא נתמך / חסרה ספרייה</string>
+    <string name="bench_err_oom">אין מספיק זיכרון</string>
+    <string name="bench_err_generic">שגיאה לא צפויה</string>
 
     <!-- Benchmark: results -->
     <string name="bench_results_title">תוצאות</string>
-    <string name="bench_device">מכשיר: %1$s · %2$d תהליכים</string>
+    <string name="bench_device_model">מכשיר: %1$s</string>
     <string name="bench_col_model">מודל</string>
+    <string name="bench_col_sec">זמן (שניות)</string>
     <string name="bench_col_ms">זמן ממוצע (ms)</string>
     <string name="bench_col_rtf">RTF (×זמן־אמת)</string>
     <string name="bench_col_wer">WER %</string>
-    <string name="bench_details_title">פירוט לפי קליפ</string>
-    <string name="bench_detail_collapsed">%1$s ▾</string>
-    <string name="bench_detail_expanded">%1$s ▴</string>
     <string name="bench_clip_line">%1$s · %2$d ms · אודיו %3$s ש׳ · WER %4$s</string>
     <string name="bench_clip_empty">(אין פלט)</string>
 </resources>

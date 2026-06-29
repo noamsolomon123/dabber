@@ -50,6 +50,35 @@ data class VariantResult(
 }
 
 /**
+ * One model's outcome in the *record-and-compare* flow (no ground-truth reference, so no WER).
+ *
+ * The user records their own voice once and every variant transcribes that same clip, so quality
+ * is compared by reading [text] rather than scored. A failed model is represented by a non-null
+ * [error] with [ms] = 0 so the comparison table can still show the other variants.
+ *
+ * @property variantId short model id (table row label).
+ * @property ms        wall-clock transcription time in milliseconds (0 on failure).
+ * @property audioSec  length of the recorded clip in seconds.
+ * @property text      transcribed Hebrew text (empty on failure).
+ * @property error     human-readable failure reason, or `null` on success.
+ */
+data class RecordResult(
+    val variantId: String,
+    val ms: Long,
+    val audioSec: Double,
+    val text: String,
+    val error: String?,
+) {
+    val ok: Boolean get() = error == null
+
+    /** Transcription wall-clock time in seconds. */
+    val seconds: Double get() = ms / 1000.0
+
+    /** Real-time factor: `< 1.0` means faster than real time. */
+    val rtf: Double get() = if (audioSec <= 0.0 || ms <= 0L) 0.0 else (ms / 1000.0) / audioSec
+}
+
+/**
  * Runs the bundled on-device benchmark for a chosen [Variant].
  *
  * Fixtures live in `assets/bench/`: a `refs.json` map of `<clip>.wav -> reference`
@@ -130,6 +159,45 @@ object BenchmarkRunner {
             threads = threads,
             clips = results,
         )
+    }
+
+    // --- Record-and-compare flow ---------------------------------------------
+
+    /**
+     * Downloads/verifies the model for [variant], reporting integer download percent via
+     * [onProgress], and returns the local model [File]. Network + disk I/O — **call off the
+     * main thread.**
+     *
+     * @throws IOException if the model cannot be downloaded or verified.
+     */
+    @Throws(IOException::class)
+    fun ensureModel(context: Context, variant: Variant, onProgress: (Int) -> Unit): File =
+        ModelDownloader.ensure(context, variant.url, variant.sha256, variant.fileName, onProgress)
+
+    /**
+     * Loads [modelFile] into a *private* [WhisperEngine], times a single Hebrew transcription of
+     * [pcm] with [System.nanoTime], releases the engine and returns `(elapsedMs, text)`.
+     *
+     * A fresh engine is loaded and released per call so models run sequentially without holding
+     * two large native contexts in memory at once. Native CPU work — **call off the main thread.**
+     *
+     * @throws IOException if the model fails to load.
+     */
+    @Throws(IOException::class)
+    fun transcribePcm(modelFile: File, pcm: FloatArray): Pair<Long, String> {
+        val engine = WhisperEngine()
+        val threads = WhisperEngine.defaultThreads()
+        try {
+            if (!engine.load(modelFile.absolutePath)) {
+                throw IOException("טעינת המודל נכשלה: ${modelFile.name}")
+            }
+            val t0 = System.nanoTime()
+            val text = engine.transcribe(pcm, "he", threads)
+            val ms = (System.nanoTime() - t0) / 1_000_000L
+            return ms to text
+        } finally {
+            engine.release()
+        }
     }
 
     /** Parses `refs.json` and decodes each fixture WAV once; cached for later runs. */

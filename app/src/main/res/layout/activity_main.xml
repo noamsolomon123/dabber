@@ -405,13 +405,19 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/downloadBtn"
                     android:layout_width="match_parent"
-                    android:layout_height="54dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_height="66dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/model_download"
-                    android:textSize="15sp"
-                    app:cornerRadius="16dp"
+                    android:textColor="@color/on_primary"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/brand_primary"
+                    app:cornerRadius="20dp"
                     app:icon="@drawable/ic_download"
-                    app:iconGravity="textStart" />
+                    app:iconGravity="textStart"
+                    app:iconSize="26dp"
+                    app:iconTint="@color/on_primary"
+                    app:rippleColor="#33FFFFFF" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

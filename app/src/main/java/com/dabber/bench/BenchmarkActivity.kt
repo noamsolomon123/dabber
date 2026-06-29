@@ -1,30 +1,48 @@
 package com.dabber.bench
 
+import android.Manifest
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.dabber.R
+import com.dabber.audio.AudioRecorder
 import com.dabber.databinding.ActivityBenchmarkBinding
-import com.google.android.material.button.MaterialButton
 import java.util.Locale
 import java.util.concurrent.Executors
 
 /**
  * On-device benchmark screen (Hebrew/RTL).
  *
- * The user picks a quantization (q4_0 / q5_0 / q8_0), runs it, and the app downloads the
- * model once, transcribes the three bundled fixtures on the *real* hardware, and appends a
- * comparison row (avg ms · RTF · WER%). Running several variants accumulates rows so the
- * speed/accuracy trade-off can be read side by side, with an expandable per-clip breakdown.
+ * ### Primary flow — record once, compare all three models
+ * The user taps one button; the app records *their own* voice (privacy-safe — never leaves the
+ * device, no bundled personal file needed), then runs every quantization (q4_0 → q5_0 → q8_0)
+ * over that single recording. For each model it downloads/verifies it once, loads a *private*
+ * [com.dabber.asr.WhisperEngine], times one Hebrew transcription, and releases it. Results are a
+ * comparison table — model · time (s) · RTF — with the transcribed text under each row so quality
+ * is judged by reading. No WER here (a personal recording has no ground-truth reference).
  *
- * All heavy work runs on a single-thread [Executors] pool; the UI is touched only via
- * [runOnUiThread]. A private [WhisperEngine][com.dabber.asr.WhisperEngine] inside
- * [BenchmarkRunner] keeps the live dictation engine untouched.
+ * ### Secondary flow — accuracy (WER)
+ * An optional button runs the bundled-FLEURS accuracy path ([BenchmarkRunner.run]) with
+ * [HebrewWer] over `assets/bench`, showing ms · RTF · WER% with an expandable per-clip breakdown.
+ *
+ * ### Robustness
+ * Every run is wrapped so the UI can **never** freeze: a `finally` always re-enables the buttons,
+ * hides the spinner, stops the live timer and clears the running flag. [UnsatisfiedLinkError] and
+ * [OutOfMemoryError] get dedicated messages, and each model has its own try/catch so one failure
+ * still lets the others finish and appear in the table. A live elapsed timer keeps the status
+ * line moving while a model transcribes so it never looks stuck.
+ *
+ * Heavy work runs on a single-thread [Executors] pool; the UI is touched only via [runOnUiThread]
+ * (or the main-looper [ui] handler that drives the timer).
  */
 class BenchmarkActivity : AppCompatActivity() {
 
@@ -33,142 +51,277 @@ class BenchmarkActivity : AppCompatActivity() {
     /** Serializes benchmark runs; one at a time, off the main thread. */
     private val executor = Executors.newSingleThreadExecutor()
 
+    /** Main-looper handler that drives the live elapsed timer. */
+    private val ui = Handler(Looper.getMainLooper())
+
+    private val recorder = AudioRecorder()
+
     @Volatile
     private var running = false
 
-    /** Toggle-group buttons in registry order, so button index maps to [ModelVariants.ALL]. */
-    private val variantButtons: List<MaterialButton> by lazy { listOf(b.btnQ4, b.btnQ5, b.btnQ8) }
+    /** On grant, kick off the recording run the user just asked for. */
+    private val micPermLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) startRecordRun() else setStatus(getString(R.string.need_mic), R.color.brand_accent)
+        }
+
+    // --- Live elapsed timer --------------------------------------------------
+
+    private var timerStart = 0L
+    private var timerLabel = ""
+
+    /** Repaints the status line with the running model's elapsed seconds every ~500ms. */
+    private val timerTick = object : Runnable {
+        override fun run() {
+            val sec = (System.currentTimeMillis() - timerStart) / 1000L
+            b.benchStatus.text = getString(R.string.bench_running_elapsed, timerLabel, sec)
+            ui.postDelayed(this, TIMER_INTERVAL_MS)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b = ActivityBenchmarkBinding.inflate(layoutInflater)
         setContentView(b.root)
 
-        // Label the toggle buttons from the single source of truth (ModelVariants).
-        variantButtons.forEachIndexed { i, btn -> btn.text = ModelVariants.ALL[i].label }
-        b.variantToggle.check(b.btnQ4.id)
-
         b.backBtn.setOnClickListener { finish() }
-        b.benchRunBtn.setOnClickListener { startRun() }
+        b.benchRecordBtn.setOnClickListener { onRecordTapped() }
+        b.benchWerBtn.setOnClickListener { startWerRun() }
     }
 
     override fun onDestroy() {
+        ui.removeCallbacks(timerTick)
         executor.shutdownNow()
         super.onDestroy()
     }
 
-    // --- Run orchestration ---------------------------------------------------
+    // --- Primary flow: record once, benchmark all three models ----------------
 
-    private fun startRun() {
+    private fun onRecordTapped() {
         if (running) return
-        val variant = selectedVariant() ?: return
+        if (!AudioRecorder.hasPermission(this)) {
+            micPermLauncher.launch(Manifest.permission.RECORD_AUDIO)
+            return
+        }
+        startRecordRun()
+    }
 
-        running = true
-        b.benchRunBtn.isEnabled = false
-        b.benchProgress.visibility = View.VISIBLE
-        b.benchStatus.setTextColor(color(R.color.muted))
-        b.benchStatus.text = getString(R.string.bench_preparing)
-
+    private fun startRecordRun() {
+        if (running) return
+        beginRun()
         executor.execute {
             try {
-                val result = BenchmarkRunner.run(this, variant) { msg ->
-                    runOnUiThread { b.benchStatus.text = msg }
+                runOnUiThread { setStatus(getString(R.string.bench_recording), R.color.brand_working) }
+                val pcm = recorder.record()
+                if (pcm.isEmpty()) {
+                    runOnUiThread { setStatus(getString(R.string.no_speech), R.color.brand_accent) }
+                    return@execute
                 }
-                runOnUiThread { onRunFinished(result) }
-            } catch (e: Exception) {
-                runOnUiThread { onRunFailed(e) }
+                val audioSec = pcm.size / SAMPLE_RATE_HZ
+                runOnUiThread { prepareResultsTable(::addRecordHeader) }
+
+                for (variant in ModelVariants.ALL) {
+                    val result = runOneRecordModel(variant, pcm, audioSec)
+                    runOnUiThread { addRecordRow(result) }
+                }
+                runOnUiThread { setStatus(getString(R.string.bench_done), R.color.brand_success) }
+            } catch (e: UnsatisfiedLinkError) {
+                runOnUiThread { setStatus(getString(R.string.bench_err_native), R.color.brand_accent) }
+            } catch (e: OutOfMemoryError) {
+                runOnUiThread { setStatus(getString(R.string.bench_err_oom), R.color.brand_accent) }
+            } catch (t: Throwable) {
+                runOnUiThread { setStatus(getString(R.string.bench_failed, t.message ?: ""), R.color.brand_accent) }
+            } finally {
+                runOnUiThread { endRun() }
             }
         }
     }
 
-    private fun onRunFinished(result: VariantResult) {
-        b.benchDevice.text = getString(R.string.bench_device, result.deviceModel, result.threads)
-        b.benchResultsCard.visibility = View.VISIBLE
-        addSummaryRow(result)
-        addDetailBlock(result)
-
-        b.benchStatus.setTextColor(color(R.color.brand_success))
-        b.benchStatus.text = getString(R.string.bench_done)
-        finishRun()
+    /** Downloads, loads, times and releases one model — never throws (failures become a row). */
+    private fun runOneRecordModel(variant: Variant, pcm: FloatArray, audioSec: Double): RecordResult {
+        return try {
+            val modelFile = BenchmarkRunner.ensureModel(this, variant) { percent ->
+                runOnUiThread {
+                    if (running) setStatus(getString(R.string.bench_downloading, variant.id, percent), R.color.muted)
+                }
+            }
+            runOnUiThread { startElapsedTimer(variant.id) }
+            val (ms, text) = BenchmarkRunner.transcribePcm(modelFile, pcm)
+            RecordResult(variant.id, ms, audioSec, text, error = null)
+        } catch (e: UnsatisfiedLinkError) {
+            RecordResult(variant.id, 0L, audioSec, "", getString(R.string.bench_err_native))
+        } catch (e: OutOfMemoryError) {
+            RecordResult(variant.id, 0L, audioSec, "", getString(R.string.bench_err_oom))
+        } catch (t: Throwable) {
+            RecordResult(variant.id, 0L, audioSec, "", t.message ?: getString(R.string.bench_err_generic))
+        } finally {
+            runOnUiThread { stopElapsedTimer() }
+        }
     }
 
-    private fun onRunFailed(e: Exception) {
-        b.benchStatus.setTextColor(color(R.color.brand_accent))
-        b.benchStatus.text = getString(R.string.bench_failed, e.message ?: "")
-        finishRun()
+    // --- Secondary flow: bundled-FLEURS accuracy (WER) ------------------------
+
+    private fun startWerRun() {
+        if (running) return
+        beginRun()
+        executor.execute {
+            try {
+                runOnUiThread { prepareResultsTable(::addWerHeader) }
+                for (variant in ModelVariants.ALL) {
+                    val outcome = runOneWerModel(variant)
+                    runOnUiThread { addWerRow(outcome) }
+                }
+                runOnUiThread { setStatus(getString(R.string.bench_done), R.color.brand_success) }
+            } catch (e: UnsatisfiedLinkError) {
+                runOnUiThread { setStatus(getString(R.string.bench_err_native), R.color.brand_accent) }
+            } catch (e: OutOfMemoryError) {
+                runOnUiThread { setStatus(getString(R.string.bench_err_oom), R.color.brand_accent) }
+            } catch (t: Throwable) {
+                runOnUiThread { setStatus(getString(R.string.bench_failed, t.message ?: ""), R.color.brand_accent) }
+            } finally {
+                runOnUiThread { endRun() }
+            }
+        }
     }
 
-    private fun finishRun() {
+    /** Runs the existing accuracy path for one model — never throws (failures become a row). */
+    private fun runOneWerModel(variant: Variant): WerOutcome {
+        return try {
+            val result = BenchmarkRunner.run(this, variant) { msg ->
+                runOnUiThread { if (running) setStatus(msg, R.color.muted) }
+            }
+            WerOutcome(variant.id, result, error = null)
+        } catch (e: UnsatisfiedLinkError) {
+            WerOutcome(variant.id, null, getString(R.string.bench_err_native))
+        } catch (e: OutOfMemoryError) {
+            WerOutcome(variant.id, null, getString(R.string.bench_err_oom))
+        } catch (t: Throwable) {
+            WerOutcome(variant.id, null, t.message ?: getString(R.string.bench_err_generic))
+        }
+    }
+
+    /** One model's result for the WER table; [result] is null when the model failed. */
+    private class WerOutcome(val variantId: String, val result: VariantResult?, val error: String?)
+
+    // --- Run lifecycle (crash-proof) -----------------------------------------
+
+    private fun beginRun() {
+        running = true
+        b.benchRecordBtn.isEnabled = false
+        b.benchWerBtn.isEnabled = false
+        b.benchProgress.visibility = View.VISIBLE
+        setStatus(getString(R.string.bench_preparing), R.color.muted)
+    }
+
+    /** Always restores an interactive screen — guarantees we never freeze on "מכין…". */
+    private fun endRun() {
+        stopElapsedTimer()
         running = false
-        b.benchRunBtn.isEnabled = true
+        b.benchRecordBtn.isEnabled = true
+        b.benchWerBtn.isEnabled = true
         b.benchProgress.visibility = View.GONE
     }
 
-    private fun selectedVariant(): Variant? {
-        val index = variantButtons.indexOfFirst { it.id == b.variantToggle.checkedButtonId }
-        return if (index >= 0) ModelVariants.ALL[index] else null
+    private fun startElapsedTimer(label: String) {
+        timerLabel = label
+        timerStart = System.currentTimeMillis()
+        b.benchStatus.setTextColor(color(R.color.brand_working))
+        ui.removeCallbacks(timerTick)
+        ui.post(timerTick)
     }
 
-    // --- Comparison table ----------------------------------------------------
+    private fun stopElapsedTimer() {
+        ui.removeCallbacks(timerTick)
+    }
 
-    /** Appends one weighted, 4-column row mirroring the static header in the layout. */
-    private fun addSummaryRow(r: VariantResult) {
-        if (b.benchTable.childCount > 0) b.benchTable.addView(divider(topMargin = 0))
+    // --- Results table -------------------------------------------------------
+
+    private fun prepareResultsTable(addHeader: () -> Unit) {
+        b.benchDevice.text = getString(R.string.bench_device_model, Build.MODEL)
+        b.benchResultsCard.visibility = View.VISIBLE
+        b.benchTable.removeAllViews()
+        addHeader()
+    }
+
+    private fun addRecordHeader() {
+        val header = headerRow()
+        header.addView(headerCell(getString(R.string.bench_col_model), 1.6f, Gravity.START or Gravity.CENTER_VERTICAL))
+        header.addView(headerCell(getString(R.string.bench_col_sec), 1.4f, Gravity.CENTER))
+        header.addView(headerCell(getString(R.string.bench_col_rtf), 1.4f, Gravity.CENTER))
+        b.benchTable.addView(header)
+    }
+
+    /** Appends a model row (model · seconds · RTF) plus its transcribed text (RTL) below it. */
+    private fun addRecordRow(r: RecordResult) {
+        b.benchTable.addView(divider(dp(8)))
+
+        val row = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            setPadding(dp(12), dp(10), dp(12), dp(6))
+        }
+        row.addView(cell(r.variantId, 1.6f, Gravity.START or Gravity.CENTER_VERTICAL, bold = true, colorRes = R.color.on_surface))
+        if (r.ok) {
+            row.addView(cell(sec(r.seconds), 1.4f, Gravity.CENTER, bold = false, colorRes = R.color.on_surface))
+            row.addView(cell(rtf(r.rtf), 1.4f, Gravity.CENTER, bold = false, colorRes = R.color.on_surface))
+        } else {
+            row.addView(cell(DASH, 1.4f, Gravity.CENTER, bold = false, colorRes = R.color.muted))
+            row.addView(cell(DASH, 1.4f, Gravity.CENTER, bold = false, colorRes = R.color.muted))
+        }
+        b.benchTable.addView(row)
+
+        b.benchTable.addView(transcriptView(r.ok, r.text, r.error))
+    }
+
+    private fun addWerHeader() {
+        val header = headerRow()
+        header.addView(headerCell(getString(R.string.bench_col_model), 1.8f, Gravity.START or Gravity.CENTER_VERTICAL))
+        header.addView(headerCell(getString(R.string.bench_col_ms), 1.7f, Gravity.CENTER))
+        header.addView(headerCell(getString(R.string.bench_col_rtf), 1.6f, Gravity.CENTER))
+        header.addView(headerCell(getString(R.string.bench_col_wer), 1.3f, Gravity.CENTER))
+        b.benchTable.addView(header)
+    }
+
+    /** Appends a WER summary row; on success it expands to a per-clip breakdown when tapped. */
+    private fun addWerRow(o: WerOutcome) {
+        b.benchTable.addView(divider(dp(8)))
+        val r = o.result
 
         val row = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
             setPadding(dp(12), dp(12), dp(12), dp(12))
         }
-        row.addView(cell(r.variantId, 1.8f, Gravity.START or Gravity.CENTER_VERTICAL, bold = true, colorRes = R.color.on_surface))
-        row.addView(cell(r.avgMs.toString(), 1.7f, Gravity.CENTER, bold = false, colorRes = R.color.on_surface))
-        row.addView(cell(rtf(r.totalRtf), 1.6f, Gravity.CENTER, bold = false, colorRes = R.color.on_surface))
-        row.addView(cell(pct(r.avgWer), 1.3f, Gravity.CENTER, bold = true, colorRes = werColor(r.avgWer)))
-        b.benchTable.addView(row)
+
+        if (r != null) {
+            row.addView(cell("${o.variantId}  ▾", 1.8f, Gravity.START or Gravity.CENTER_VERTICAL, bold = true, colorRes = R.color.brand_primary))
+            row.addView(cell(r.avgMs.toString(), 1.7f, Gravity.CENTER, bold = false, colorRes = R.color.on_surface))
+            row.addView(cell(rtf(r.totalRtf), 1.6f, Gravity.CENTER, bold = false, colorRes = R.color.on_surface))
+            row.addView(cell(pct(r.avgWer), 1.3f, Gravity.CENTER, bold = true, colorRes = werColor(r.avgWer)))
+            b.benchTable.addView(row)
+
+            val clips = buildWerDetails(r)
+            row.setOnClickListener { clips.visibility = if (clips.visibility == View.VISIBLE) View.GONE else View.VISIBLE }
+            b.benchTable.addView(clips)
+        } else {
+            row.addView(cell(o.variantId, 1.8f, Gravity.START or Gravity.CENTER_VERTICAL, bold = true, colorRes = R.color.on_surface))
+            row.addView(cell(DASH, 1.7f, Gravity.CENTER, bold = false, colorRes = R.color.muted))
+            row.addView(cell(DASH, 1.6f, Gravity.CENTER, bold = false, colorRes = R.color.muted))
+            row.addView(cell(DASH, 1.3f, Gravity.CENTER, bold = false, colorRes = R.color.muted))
+            b.benchTable.addView(row)
+            b.benchTable.addView(transcriptView(ok = false, text = "", error = o.error))
+        }
     }
 
-    // --- Expandable per-clip detail ------------------------------------------
-
-    private fun addDetailBlock(r: VariantResult) {
-        val block = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-            ).also { if (b.benchDetails.childCount > 0) it.topMargin = dp(8) }
-        }
-
-        val clipList = LinearLayout(this).apply {
+    private fun buildWerDetails(r: VariantResult): LinearLayout {
+        val list = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             visibility = View.GONE
-            setPadding(dp(4), dp(8), dp(4), dp(4))
+            setPadding(dp(12), 0, dp(12), dp(8))
         }
-
-        val header = TextView(this).apply {
-            text = getString(R.string.bench_detail_collapsed, r.label)
-            setTextColor(color(R.color.brand_primary))
-            textSize = 14f
-            setTypeface(typeface, Typeface.BOLD)
-            setPadding(dp(4), dp(8), dp(4), dp(8))
-            setOnClickListener {
-                val show = clipList.visibility != View.VISIBLE
-                clipList.visibility = if (show) View.VISIBLE else View.GONE
-                text = getString(
-                    if (show) R.string.bench_detail_expanded else R.string.bench_detail_collapsed,
-                    r.label,
-                )
-            }
-        }
-
         for (clip in r.clips) {
             val line = TextView(this).apply {
-                text = getString(
-                    R.string.bench_clip_line,
-                    clip.name,
-                    clip.ms,
-                    sec(clip.audioSec),
-                    pct(clip.wer),
-                )
+                text = getString(R.string.bench_clip_line, clip.name, clip.ms, sec(clip.audioSec), pct(clip.wer))
                 setTextColor(color(R.color.on_surface))
                 textSize = 13f
                 setTypeface(typeface, Typeface.BOLD)
@@ -181,16 +334,44 @@ class BenchmarkActivity : AppCompatActivity() {
                 setPadding(0, dp(2), 0, dp(10))
                 setLineSpacing(dp(2).toFloat(), 1f)
             }
-            clipList.addView(line)
-            clipList.addView(text)
+            list.addView(line)
+            list.addView(text)
         }
-
-        block.addView(header)
-        block.addView(clipList)
-        b.benchDetails.addView(block)
+        return list
     }
 
     // --- View builders / formatting ------------------------------------------
+
+    /** Transcript (RTL) on success, or the failure reason in accent colour. */
+    private fun transcriptView(ok: Boolean, text: String, error: String?): TextView = TextView(this).apply {
+        if (ok) {
+            this.text = text.ifBlank { getString(R.string.bench_clip_empty) }
+            setTextColor(color(if (text.isBlank()) R.color.muted else R.color.on_surface))
+        } else {
+            this.text = getString(R.string.bench_model_failed, error ?: "")
+            setTextColor(color(R.color.brand_accent))
+        }
+        textSize = 14f
+        textDirection = View.TEXT_DIRECTION_RTL
+        setPadding(dp(12), 0, dp(12), dp(12))
+        setLineSpacing(dp(2).toFloat(), 1f)
+    }
+
+    private fun headerRow(): LinearLayout = LinearLayout(this).apply {
+        orientation = LinearLayout.HORIZONTAL
+        gravity = Gravity.CENTER_VERTICAL
+        setBackgroundResource(R.drawable.bg_scratch)
+        setPadding(dp(12), dp(10), dp(12), dp(10))
+    }
+
+    private fun headerCell(value: String, weight: Float, gravity: Int): TextView = TextView(this).apply {
+        layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, weight)
+        text = value
+        this.gravity = gravity
+        textSize = 12f
+        setTextColor(color(R.color.muted))
+        setTypeface(typeface, Typeface.BOLD)
+    }
 
     private fun cell(
         value: String,
@@ -214,6 +395,11 @@ class BenchmarkActivity : AppCompatActivity() {
         setBackgroundColor(color(R.color.outline))
     }
 
+    private fun setStatus(msg: String, colorRes: Int) {
+        b.benchStatus.setTextColor(color(colorRes))
+        b.benchStatus.text = msg
+    }
+
     private fun color(res: Int): Int = ContextCompat.getColor(this, res)
 
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
@@ -229,5 +415,12 @@ class BenchmarkActivity : AppCompatActivity() {
         wer <= 0.15 -> R.color.brand_success
         wer <= 0.30 -> R.color.brand_working
         else -> R.color.brand_accent
+    }
+
+    private companion object {
+        /** Matches WhisperEngine / AudioRecorder capture rate; used to derive clip length. */
+        const val SAMPLE_RATE_HZ = 16_000.0
+        const val TIMER_INTERVAL_MS = 500L
+        const val DASH = "—"
     }
 }

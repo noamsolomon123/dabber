@@ -78,7 +78,7 @@
                 app:tint="@color/hero_on" />
         </LinearLayout>
 
-        <!-- ====================== VARIANT PICKER CARD ======================= -->
+        <!-- ====================== RECORD & COMPARE CARD ===================== -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/bench_pick_title"
+                    android:text="@string/bench_action_title"
                     android:textColor="@color/on_surface"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -105,57 +105,56 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@string/bench_pick_desc"
+                    android:text="@string/bench_action_desc"
                     android:textColor="@color/muted"
                     android:textSize="13sp"
                     android:lineSpacingExtra="2dp" />
 
-                <com.google.android.material.button.MaterialButtonToggleGroup
-                    android:id="@+id/variantToggle"
+                <!-- Primary action: record once, benchmark all three models -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/benchRecordBtn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="vertical"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
+                    android:layout_height="58dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/bench_record"
+                    android:textSize="16sp"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/ic_mic"
+                    app:iconGravity="textStart" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnQ4"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical|end"
-                        android:textAlignment="viewEnd"
-                        app:cornerRadius="14dp"
-                        tools:text="q4_0 — קטן ומהיר (453MB)" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnQ5"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical|end"
-                        android:textAlignment="viewEnd"
-                        app:cornerRadius="14dp"
-                        tools:text="q5_0 — בינוני (548MB)" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnQ8"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:gravity="center_vertical|end"
-                        android:textAlignment="viewEnd"
-                        app:cornerRadius="14dp"
-                        tools:text="q8_0 — הכי מדויק (834MB)" />
-                </com.google.android.material.button.MaterialButtonToggleGroup>
-
+                <!-- CPU / NPU note -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_scratch"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_graphic_eq"
+                        app:tint="@color/brand_working" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="@string/bench_cpu_note"
+                        android:textColor="@color/muted"
+                        android:textSize="12sp"
+                        android:lineSpacingExtra="2dp" />
+                </LinearLayout>
+
+                <!-- Download warning -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/bg_scratch"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
@@ -179,17 +178,6 @@
                         android:lineSpacingExtra="2dp" />
                 </LinearLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/benchRunBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="18dp"
-                    android:text="@string/bench_run"
-                    android:textSize="16sp"
-                    app:cornerRadius="16dp"
-                    app:icon="@drawable/ic_speed"
-                    app:iconGravity="textStart" />
-
                 <com.google.android.material.progressindicator.LinearProgressIndicator
                     android:id="@+id/benchProgress"
                     android:layout_width="match_parent"
@@ -212,6 +200,16 @@
                     android:text="@string/bench_idle"
                     android:textColor="@color/muted"
                     android:textSize="13sp" />
+
+                <!-- Secondary action: bundled-FLEURS accuracy (WER) -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/benchWerBtn"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/bench_wer"
+                    android:textSize="14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -250,89 +248,12 @@
                     android:textSize="13sp"
                     tools:text="מכשיר: Pixel 7" />
 
-                <!-- Comparison-table header -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_scratch"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.8"
-                        android:text="@string/bench_col_model"
-                        android:textColor="@color/muted"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.7"
-                        android:gravity="center"
-                        android:text="@string/bench_col_ms"
-                        android:textColor="@color/muted"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.6"
-                        android:gravity="center"
-                        android:text="@string/bench_col_rtf"
-                        android:textColor="@color/muted"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.3"
-                        android:gravity="center"
-                        android:text="@string/bench_col_wer"
-                        android:textColor="@color/muted"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <!-- One summary row per completed run is appended here, in code. -->
+                <!-- Header + one row (and transcript) per model are built in code. -->
                 <LinearLayout
                     android:id="@+id/benchTable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginBottom="14dp"
-                    android:background="@color/outline" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bench_details_title"
-                    android:textColor="@color/muted"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.04"
-                    android:textAllCaps="true" />
-
-                <!-- One expandable per-clip detail block per run is appended here, in code. -->
-                <LinearLayout
-                    android:id="@+id/benchDetails"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="14dp"
                     android:orientation="vertical" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
