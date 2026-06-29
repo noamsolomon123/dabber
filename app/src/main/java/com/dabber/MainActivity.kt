@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         intent?.getStringExtra("transcribe_wav")?.let { runDebugTranscription(it) }
+        intent?.getStringExtra("onnx_wav")?.let { runOnnxDebugTranscription(it) }
     }
 
     override fun onResume() {
@@ -224,6 +225,37 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
+    /**
+     * Debug-only: transcribe a 16 kHz mono WAV with the native-Kotlin ONNX Runtime engine
+     * ([com.dabber.npu.OnnxWhisperEngine], CPU EP). Models must be pushed to
+     * `filesDir/onnx-turbo/` (encoder_model.onnx + .onnx_data sidecar, decoder_model.onnx).
+     * Triggered via:
+     *   `adb shell am start -n com.dabber/.MainActivity --es onnx_wav <path>`
+     * Runs in parallel to the whisper.cpp `transcribe_wav` hook; logs under "DabberOnnx".
+     */
+    private fun runOnnxDebugTranscription(path: String) {
+        Thread {
+            val onnxDir = File(filesDir, "onnx-turbo")
+            Log.i(ONNX_TAG, "onnxDir=${onnxDir.absolutePath} exists=${onnxDir.exists()}")
+            val engine = com.dabber.npu.OnnxWhisperEngine()
+            try {
+                if (!engine.load(onnxDir)) {
+                    Log.e(ONNX_TAG, "ONNX LOAD FAILED (need encoder_model.onnx + decoder_model.onnx)")
+                    return@Thread
+                }
+                val pcm = WavReader.readPcm16Mono(File(path))
+                Log.i(ONNX_TAG, "wav samples=${pcm.size}")
+                val t0 = System.currentTimeMillis()
+                val text = engine.transcribe(this, pcm, "he")
+                Log.i(ONNX_TAG, "ONNX(${System.currentTimeMillis() - t0}ms): $text")
+            } catch (e: Exception) {
+                Log.e(ONNX_TAG, "ONNX transcription failed", e)
+            } finally {
+                engine.close()
+            }
+        }.start()
+    }
+
     // --- Bubble --------------------------------------------------------------
 
     private fun toggleBubble() {
@@ -261,5 +293,6 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "DabberTest"
+        private const val ONNX_TAG = "DabberOnnx"
     }
 }

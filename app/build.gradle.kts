@@ -59,6 +59,9 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.lifecycle.service)
+    // ONNX Runtime CPU EP (ships arm64-v8a + x86_64, so it runs on the emulator) for the
+    // com.dabber.npu Whisper engine. NPU swap later: replace with onnxruntime-android-qnn.
+    implementation("com.microsoft.onnxruntime:onnxruntime-android:1.20.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
