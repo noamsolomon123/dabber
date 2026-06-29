@@ -1,12 +1,15 @@
 package com.dabber.a11y
 
 import android.accessibilityservice.AccessibilityService
+import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
+import com.dabber.overlay.OverlayService
 
 /**
  * Accessibility service that inserts dictated text into whatever editable field currently
@@ -19,20 +22,72 @@ import android.view.accessibility.AccessibilityNodeInfo
  */
 class InsertionService : AccessibilityService() {
 
+    /** Throttle for the noisy TYPE_WINDOW_CONTENT_CHANGED stream (uptime millis). */
+    @Volatile
+    private var lastContentEvalMs = 0L
+
     override fun onServiceConnected() {
         instance = this
+        // The XML config registers typeViewFocused; also listen for window state/content
+        // changes so we can detect when an editable field gains/loses input focus (keyboard
+        // up/down) and drive the bubble's visibility.
+        runCatching {
+            val info = serviceInfo ?: AccessibilityServiceInfo()
+            info.eventTypes = info.eventTypes or
+                AccessibilityEvent.TYPE_VIEW_FOCUSED or
+                AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED or
+                AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED
+            serviceInfo = info
+        }
+        evaluateEditableFocus()
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
-        // We don't react to events; we act on demand from the overlay.
+        // We act on demand from the overlay for insertion; here we only track whether an
+        // editable field currently has input focus to toggle the bubble's visibility.
+        when (event?.eventType) {
+            AccessibilityEvent.TYPE_VIEW_FOCUSED,
+            AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED -> evaluateEditableFocus()
+            AccessibilityEvent.TYPE_WINDOW_CONTENT_CHANGED -> {
+                val now = SystemClock.uptimeMillis()
+                if (now - lastContentEvalMs >= CONTENT_THROTTLE_MS) {
+                    lastContentEvalMs = now
+                    evaluateEditableFocus()
+                }
+            }
+            else -> {}
+        }
     }
 
     override fun onInterrupt() {}
 
     override fun onDestroy() {
         if (instance === this) instance = null
+        editableFocused = false
+        // Accessibility is now off — let the overlay fall back to always-visible.
+        OverlayService.notifyEditableFocus(false)
         super.onDestroy()
     }
+
+    /** Recomputes [editableFocused] from the active window and notifies the overlay on change. */
+    private fun evaluateEditableFocus() {
+        val editable = runCatching {
+            val root = rootInActiveWindow ?: return@runCatching false
+            val node = root.findFocus(AccessibilityNodeInfo.FOCUS_INPUT)
+            val result = node != null && node.isEditable
+            @Suppress("DEPRECATION")
+            node?.recycle()
+            result
+        }.getOrDefault(false)
+
+        if (editable != editableFocused) {
+            editableFocused = editable
+            OverlayService.notifyEditableFocus(editable)
+        }
+    }
+
+    /** Forces a focus re-check (used by the overlay when it starts up). */
+    fun forceEvaluate() = evaluateEditableFocus()
 
     /** Inserts [text] at the caret of the focused editable field. Returns true on success. */
     fun insertText(text: String): Boolean {
@@ -92,8 +147,16 @@ class InsertionService : AccessibilityService() {
     }
 
     companion object {
+        /** How often the chatty content-changed stream may trigger a focus re-check. */
+        private const val CONTENT_THROTTLE_MS = 250L
+
         @Volatile
         var instance: InsertionService? = null
+            private set
+
+        /** True while an editable text field currently holds input focus (keyboard context). */
+        @Volatile
+        var editableFocused: Boolean = false
             private set
 
         /** True when the user has enabled the accessibility service in system settings. */

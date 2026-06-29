@@ -2,7 +2,23 @@
     <string name="app_name">דַּבֵּר</string>
     <string name="app_tagline">הקלדה קולית בעברית — חינמית ומקומית לחלוטין</string>
 
+    <!-- Section headers -->
+    <string name="setup_title">הגדרה ראשונית</string>
     <string name="section_perms">הרשאות</string>
+
+    <!-- Setup cards: titles, descriptions, state -->
+    <string name="status_granted">מופעל</string>
+    <string name="status_needs_setup">דרושה הגדרה</string>
+    <string name="action_grant">הגדר</string>
+
+    <string name="card_mic_title">מיקרופון</string>
+    <string name="card_mic_desc">כדי להקליט את הדיבור שלך</string>
+    <string name="card_overlay_title">ציור מעל אפליקציות</string>
+    <string name="card_overlay_desc">כדי להציג את הבועה הצפה</string>
+    <string name="card_a11y_title">שירות נגישות</string>
+    <string name="card_a11y_desc">כדי להזין טקסט בכל אפליקציה</string>
+
+    <!-- Legacy permission strings (kept for compatibility) -->
     <string name="perm_mic">הרשאת מיקרופון</string>
     <string name="perm_mic_grant">הענק הרשאת מיקרופון</string>
     <string name="perm_overlay">ציור מעל אפליקציות</string>
@@ -10,28 +26,38 @@
     <string name="perm_a11y">שירות נגישות (הזנת טקסט)</string>
     <string name="perm_a11y_grant">הפעל שירות נגישות</string>
 
+    <!-- Model card -->
     <string name="section_model">מודל</string>
-    <string name="model_loaded">✓ מודל העברית נטען</string>
-    <string name="model_missing">✗ המודל לא נמצא — יש להוריד או לדחוף אותו</string>
+    <string name="card_model_title">מודל העברית</string>
+    <string name="card_model_desc">מנוע התמלול פועל במכשיר — ללא אינטרנט וללא ענן</string>
+    <string name="model_loaded">מודל העברית נטען ומוכן</string>
+    <string name="model_missing">המודל לא נמצא — יש להוריד אותו</string>
     <string name="model_download">הורד מודל עברית (548MB)</string>
     <string name="model_downloading">מוריד… %1$d%%</string>
     <string name="model_done">המודל הותקן ✓</string>
     <string name="model_failed">ההורדה נכשלה: %1$s</string>
 
+    <!-- Floating bubble -->
     <string name="section_bubble">בועה צפה</string>
+    <string name="card_bubble_title">בועה צפה</string>
+    <string name="card_bubble_desc">כפתור מיקרופון שמרחף מעל כל אפליקציה</string>
     <string name="bubble_start">הפעל בועה צפה</string>
     <string name="bubble_started">הבועה הופעלה — הקש עליה כדי לדבר</string>
 
+    <!-- In-app scratchpad -->
     <string name="section_test">בדיקה מהירה</string>
+    <string name="card_test_title">נסה עכשיו</string>
+    <string name="card_test_desc">הקש על המיקרופון ודבר — הטקסט יופיע למטה</string>
     <string name="scratch_hint">הקש על הכפתור ודבר — הטקסט יופיע כאן</string>
-    <string name="dictate_btn">🎤 הקלד לכאן בקול</string>
+    <string name="dictate_btn">הקלד לכאן בקול</string>
     <string name="dictating">מקליט… דבר עכשיו</string>
     <string name="transcribing">מתמלל…</string>
     <string name="no_speech">לא זוהה דיבור</string>
 
+    <!-- Shared / used by services -->
     <string name="no_model">המודל עדיין לא נטען</string>
     <string name="need_mic">דרושה הרשאת מיקרופון</string>
     <string name="copied_clip">אין שדה פעיל — הטקסט הועתק</string>
     <string name="overlay_running">דַּבֵּר פעיל — הקש על הבועה כדי לדבר</string>
-    <string name="a11y_description">מאפשר ל־דבֵּר להזין טקסט מוקלד לשדה הטקסט הפעיל בכל אפליקציה.</string>
+    <string name="a11y_description">מאפשר ל־דבֵּר להזין טקסט מוקלד לשדה הטקסט הפעיל בכל אפליקציה.</string>
 </resources>

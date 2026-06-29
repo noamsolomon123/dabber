@@ -1,4 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Base shape for the floating mic button. The solid fill is a placeholder: OverlayService
+  inflates + mutates this drawable and animates its colour per state (indigo / red / amber /
+  green / grey) via GradientDrawable.setColor. The thin translucent rim gives a premium edge
+  highlight that survives the colour swaps.
+-->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
-    <solid android:color="#5B5BD6" />
+    <solid android:color="#6366F1" />
+    <stroke
+        android:width="1dp"
+        android:color="#40FFFFFF" />
 </shape>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand palette (lifted for dark surfaces) -->
+    <color name="brand_primary">#818CF8</color>
+    <color name="brand_primary_dark">#6366F1</color>
+    <color name="brand_accent">#F87171</color>
+    <color name="brand_working">#FBBF24</color>
+    <color name="brand_success">#34D399</color>
+
+    <!-- Surfaces / text -->
+    <color name="app_background">#0E0E14</color>
+    <color name="app_surface">#1A1A22</color>
+    <color name="on_surface">#F3F3F7</color>
+    <color name="muted">#9CA3AF</color>
+    <color name="on_primary">#15151E</color>
+
+    <!-- Containers / tints -->
+    <color name="brand_primary_container">#2A2A52</color>
+    <color name="on_primary_container">#C7C9FF</color>
+    <color name="success_container">#10362B</color>
+    <color name="on_success_container">#6EE7B7</color>
+    <color name="success_outline">#1F5C46</color>
+    <color name="surface_variant">#23232E</color>
+    <color name="outline">#33333F</color>
+
+    <!-- Hero gradient -->
+    <color name="hero_gradient_start">#4F46E5</color>
+    <color name="hero_gradient_end">#3730A3</color>
+    <color name="hero_on">#FFFFFF</color>
+    <color name="hero_on_muted">#C7C9FF</color>
+</resources>

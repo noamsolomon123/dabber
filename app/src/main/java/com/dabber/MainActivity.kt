@@ -6,14 +6,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.text.InputType
 import android.util.Log
-import android.view.Gravity
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -22,30 +16,29 @@ import androidx.core.content.ContextCompat
 import com.dabber.audio.AudioRecorder
 import com.dabber.audio.WavReader
 import com.dabber.core.DictationCore
+import com.dabber.databinding.ActivityMainBinding
 import com.dabber.model.ModelConfig
 import com.dabber.model.ModelDownloader
 import com.dabber.model.ModelStore
 import com.dabber.overlay.OverlayService
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import java.io.File
 
 /**
  * Single-screen control panel (Hebrew/RTL): grant the three permissions, load the model,
  * toggle the floating bubble, and a built-in scratchpad to test dictation without leaving
  * the app (works even before accessibility/overlay are enabled).
+ *
+ * The UI is a polished Material 3 layout (see res/layout/activity_main.xml); all behaviour
+ * and the runtime contracts (permissions, model download/load, bubble service, in-app
+ * dictation, debug transcription hook) are unchanged from the original programmatic screen.
  */
 class MainActivity : AppCompatActivity() {
 
-    private val testRecorder = AudioRecorder()
+    private lateinit var b: ActivityMainBinding
 
-    private lateinit var micStatus: TextView
-    private lateinit var overlayStatus: TextView
-    private lateinit var a11yStatus: TextView
-    private lateinit var modelStatus: TextView
-    private lateinit var modelProgress: TextView
-    private lateinit var downloadBtn: Button
-    private lateinit var bubbleBtn: Button
-    private lateinit var dictateBtn: Button
-    private lateinit var scratch: EditText
+    private val testRecorder = AudioRecorder()
 
     private val permLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
@@ -54,7 +47,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(buildUi())
+        b = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(b.root)
+
+        b.micGrantBtn.setOnClickListener { requestMic() }
+        b.overlayGrantBtn.setOnClickListener { requestOverlay() }
+        b.a11yGrantBtn.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+        }
+        b.downloadBtn.setOnClickListener { downloadModel() }
+        b.bubbleBtn.setOnClickListener { toggleBubble() }
+        b.dictateBtn.setOnClickListener { dictateIntoScratchpad() }
+
         intent?.getStringExtra("transcribe_wav")?.let { runDebugTranscription(it) }
     }
 
@@ -62,57 +66,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         maybeLoadModel()
         refresh()
-    }
-
-    private fun buildUi(): View {
-        val pad = dp(20)
-        val col = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutDirection = View.LAYOUT_DIRECTION_RTL
-            setPadding(pad, pad, pad, pad)
-        }
-
-        col.addView(title(getString(R.string.app_name), 28f))
-        col.addView(label(getString(R.string.app_tagline)))
-
-        col.addView(header(getString(R.string.section_perms)))
-        micStatus = label("")
-        overlayStatus = label("")
-        a11yStatus = label("")
-        col.addView(micStatus)
-        col.addView(button(getString(R.string.perm_mic_grant)) { requestMic() })
-        col.addView(overlayStatus)
-        col.addView(button(getString(R.string.perm_overlay_grant)) { requestOverlay() })
-        col.addView(a11yStatus)
-        col.addView(button(getString(R.string.perm_a11y_grant)) {
-            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
-        })
-
-        col.addView(header(getString(R.string.section_model)))
-        modelStatus = label("")
-        col.addView(modelStatus)
-        modelProgress = label("")
-        col.addView(modelProgress)
-        downloadBtn = button(getString(R.string.model_download)) { downloadModel() }
-        col.addView(downloadBtn)
-
-        col.addView(header(getString(R.string.section_bubble)))
-        bubbleBtn = button(getString(R.string.bubble_start)) { toggleBubble() }
-        col.addView(bubbleBtn)
-
-        col.addView(header(getString(R.string.section_test)))
-        scratch = EditText(this).apply {
-            hint = getString(R.string.scratch_hint)
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE
-            minLines = 3
-            gravity = Gravity.TOP or Gravity.END
-            textDirection = View.TEXT_DIRECTION_RTL
-        }
-        col.addView(scratch)
-        dictateBtn = button(getString(R.string.dictate_btn)) { dictateIntoScratchpad() }
-        col.addView(dictateBtn)
-
-        return ScrollView(this).apply { addView(col) }
     }
 
     // --- State refresh -------------------------------------------------------
@@ -123,21 +76,61 @@ class MainActivity : AppCompatActivity() {
         val a11yOk = isAccessibilityEnabled()
         val modelOk = DictationCore.modelLoaded
 
-        micStatus.text = statusLine(R.string.perm_mic, micOk)
-        overlayStatus.text = statusLine(R.string.perm_overlay, overlayOk)
-        a11yStatus.text = statusLine(R.string.perm_a11y, a11yOk)
-        modelStatus.text =
-            if (modelOk) getString(R.string.model_loaded) else getString(R.string.model_missing)
+        bindPermCard(b.micCard, b.micStatus, b.micGrantBtn, b.micCheck, R.string.card_mic_desc, micOk)
+        bindPermCard(b.overlayCard, b.overlayStatus, b.overlayGrantBtn, b.overlayCheck, R.string.card_overlay_desc, overlayOk)
+        bindPermCard(b.a11yCard, b.a11yStatus, b.a11yGrantBtn, b.a11yCheck, R.string.card_a11y_desc, a11yOk)
 
-        bubbleBtn.isEnabled = micOk && overlayOk && modelOk
-        dictateBtn.isEnabled = micOk && modelOk
-        downloadBtn.visibility =
+        b.modelStatus.text =
+            if (modelOk) getString(R.string.model_loaded) else getString(R.string.model_missing)
+        b.modelStatus.setTextColor(
+            ContextCompat.getColor(this, if (modelOk) R.color.brand_success else R.color.muted),
+        )
+        if (modelOk) {
+            b.modelProgressBar.visibility = View.GONE
+            b.modelProgress.text = ""
+        }
+
+        b.bubbleBtn.isEnabled = micOk && overlayOk && modelOk
+        b.dictateBtn.isEnabled = micOk && modelOk
+        b.downloadBtn.visibility =
             if (!modelOk && ModelConfig.hasRemoteSource) View.VISIBLE else View.GONE
+    }
+
+    /**
+     * Styles one setup card to reflect [ok]: granted → faint-green tint, green stroke, a
+     * "מופעל" status, a check icon and a hidden CTA; not granted → neutral surface, the
+     * descriptive subtitle and a visible "הגדר" button.
+     */
+    private fun bindPermCard(
+        card: MaterialCardView,
+        status: TextView,
+        grantBtn: MaterialButton,
+        check: View,
+        descRes: Int,
+        ok: Boolean,
+    ) {
+        if (ok) {
+            card.setCardBackgroundColor(ContextCompat.getColor(this, R.color.success_container))
+            card.setStrokeColor(ContextCompat.getColor(this, R.color.success_outline))
+            status.text = getString(R.string.status_granted)
+            status.setTextColor(ContextCompat.getColor(this, R.color.on_success_container))
+            grantBtn.visibility = View.GONE
+            check.visibility = View.VISIBLE
+        } else {
+            card.setCardBackgroundColor(ContextCompat.getColor(this, R.color.app_surface))
+            card.setStrokeColor(ContextCompat.getColor(this, R.color.outline))
+            status.text = getString(descRes)
+            status.setTextColor(ContextCompat.getColor(this, R.color.muted))
+            grantBtn.visibility = View.VISIBLE
+            check.visibility = View.GONE
+        }
     }
 
     private fun downloadModel() {
         if (!ModelConfig.hasRemoteSource) return
-        downloadBtn.isEnabled = false
+        b.downloadBtn.isEnabled = false
+        b.modelProgressBar.isIndeterminate = false
+        b.modelProgressBar.visibility = View.VISIBLE
         Thread {
             try {
                 val f = ModelDownloader.ensure(
@@ -145,24 +138,24 @@ class MainActivity : AppCompatActivity() {
                     ModelConfig.URL,
                     ModelConfig.SHA256,
                     ModelConfig.FILE_NAME,
-                ) { p -> runOnUiThread { modelProgress.text = getString(R.string.model_downloading, p) } }
+                ) { p ->
+                    runOnUiThread {
+                        b.modelProgress.text = getString(R.string.model_downloading, p)
+                        b.modelProgressBar.setProgressCompat(p, true)
+                    }
+                }
                 DictationCore.loadModel(f.absolutePath)
                 runOnUiThread {
-                    modelProgress.text = getString(R.string.model_done)
+                    b.modelProgress.text = getString(R.string.model_done)
                     refresh()
                 }
             } catch (e: Exception) {
                 runOnUiThread {
-                    modelProgress.text = getString(R.string.model_failed, e.message ?: "")
-                    downloadBtn.isEnabled = true
+                    b.modelProgress.text = getString(R.string.model_failed, e.message ?: "")
+                    b.downloadBtn.isEnabled = true
                 }
             }
         }.start()
-    }
-
-    private fun statusLine(labelRes: Int, ok: Boolean): String {
-        val mark = if (ok) "✓" else "✗"
-        return "$mark  ${getString(labelRes)}"
     }
 
     // --- Permissions ---------------------------------------------------------
@@ -240,46 +233,28 @@ class MainActivity : AppCompatActivity() {
     private fun dictateIntoScratchpad() {
         if (!DictationCore.modelLoaded) { toast(getString(R.string.no_model)); return }
         if (!AudioRecorder.hasPermission(this)) { requestMic(); return }
-        dictateBtn.isEnabled = false
-        dictateBtn.text = getString(R.string.dictating)
+        b.dictateBtn.isEnabled = false
+        b.dictateBtn.text = getString(R.string.dictating)
         Thread {
             val pcm = testRecorder.record()
-            runOnUiThread { dictateBtn.text = getString(R.string.transcribing) }
+            runOnUiThread { b.dictateBtn.text = getString(R.string.transcribing) }
             val text = DictationCore.transcribeClean(pcm, ModelConfig.LANG)
             runOnUiThread {
                 if (text.isNotBlank()) {
-                    val at = scratch.selectionStart.coerceIn(0, scratch.text.length)
-                    scratch.text.insert(at, text)
+                    val at = b.scratch.selectionStart.coerceIn(0, b.scratch.text.length)
+                    b.scratch.text.insert(at, text)
                 } else {
                     toast(getString(R.string.no_speech))
                 }
-                dictateBtn.isEnabled = true
-                dictateBtn.text = getString(R.string.dictate_btn)
+                b.dictateBtn.isEnabled = true
+                b.dictateBtn.text = getString(R.string.dictate_btn)
             }
         }.start()
     }
 
-    // --- Tiny view builders --------------------------------------------------
-
-    private fun title(text: String, size: Float) = TextView(this).apply {
-        this.text = text; textSize = size; setPadding(0, dp(8), 0, dp(8))
-    }
-
-    private fun header(text: String) = TextView(this).apply {
-        this.text = text; textSize = 18f; setPadding(0, dp(20), 0, dp(6))
-    }
-
-    private fun label(text: String) = TextView(this).apply {
-        this.text = text; textSize = 15f; setPadding(0, dp(4), 0, dp(4))
-    }
-
-    private fun button(text: String, onClick: () -> Unit) = Button(this).apply {
-        this.text = text; setOnClickListener { onClick() }
-    }
+    // --- Helpers -------------------------------------------------------------
 
     private fun toast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-
-    private fun dp(v: Int): Int = (v * resources.displayMetrics.density).toInt()
 
     companion object {
         private const val TAG = "DabberTest"
