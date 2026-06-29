@@ -9,9 +9,8 @@ build/
 # python
 .venv/
 __pycache__/
-# models / audio (large, downloaded)
-models/*.bin
-models/*.gguf
+# models, audio, and local test artifacts (incl. private recordings) — never publish
+models/
 benchmark/data/
 # android
 .cxx/

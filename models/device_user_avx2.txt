@@ -1,4 +1,0 @@
---------- beginning of main
-06-29 10:16:14.145  8011  8062 I DabberWhisper: whisper model loaded
-06-29 10:16:14.146  8011  8062 I DabberTest: model loaded=true path=/storage/emulated/0/Android/data/com.dabber/files/models/dabber-he.bin exists=true
-06-29 10:16:14.321  8011  8062 I DabberTest: wav samples=211584
