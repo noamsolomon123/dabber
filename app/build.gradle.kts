@@ -15,8 +15,8 @@ android {
         versionName = "0.1.0"
 
         ndk {
-            // Ship arm64 for the phone; x86_64 added by the emulator build variant when needed.
-            abiFilters += listOf("arm64-v8a")
+            // arm64-v8a runs on the phone; x86_64 lets the same APK install on the emulator.
+            abiFilters += listOf("arm64-v8a", "x86_64")
         }
         externalNativeBuild {
             cmake {

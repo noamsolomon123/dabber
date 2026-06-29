@@ -65,6 +65,18 @@ def run(n=40, only=None):
             rows.append({"model": mid, "status": f"error: {e}"})
             print(f"{mid}: ERROR {e}")
             traceback.print_exc()
+        finally:
+            try:
+                del runner
+            except NameError:
+                pass
+            import gc
+
+            import torch
+
+            gc.collect()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
     rows.sort(key=lambda r: (r.get("wer", 9), r.get("rtf", 9)))
     json.dump(
         rows,

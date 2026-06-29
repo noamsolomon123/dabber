@@ -1,4 +1,33 @@
 <resources>
     <string name="app_name">דַּבֵּר</string>
-    <string name="app_tagline">דַּבֵּר — הקלדה קולית בעברית, מקומית לגמרי</string>
+    <string name="app_tagline">הקלדה קולית בעברית — חינמית ומקומית לחלוטין</string>
+
+    <string name="section_perms">הרשאות</string>
+    <string name="perm_mic">הרשאת מיקרופון</string>
+    <string name="perm_mic_grant">הענק הרשאת מיקרופון</string>
+    <string name="perm_overlay">ציור מעל אפליקציות</string>
+    <string name="perm_overlay_grant">הענק הרשאת ציור מעל אפליקציות</string>
+    <string name="perm_a11y">שירות נגישות (הזנת טקסט)</string>
+    <string name="perm_a11y_grant">הפעל שירות נגישות</string>
+
+    <string name="section_model">מודל</string>
+    <string name="model_loaded">✓ מודל העברית נטען</string>
+    <string name="model_missing">✗ המודל לא נמצא — יש להוריד או לדחוף אותו</string>
+
+    <string name="section_bubble">בועה צפה</string>
+    <string name="bubble_start">הפעל בועה צפה</string>
+    <string name="bubble_started">הבועה הופעלה — הקש עליה כדי לדבר</string>
+
+    <string name="section_test">בדיקה מהירה</string>
+    <string name="scratch_hint">הקש על הכפתור ודבר — הטקסט יופיע כאן</string>
+    <string name="dictate_btn">🎤 הקלד לכאן בקול</string>
+    <string name="dictating">מקליט… דבר עכשיו</string>
+    <string name="transcribing">מתמלל…</string>
+    <string name="no_speech">לא זוהה דיבור</string>
+
+    <string name="no_model">המודל עדיין לא נטען</string>
+    <string name="need_mic">דרושה הרשאת מיקרופון</string>
+    <string name="copied_clip">אין שדה פעיל — הטקסט הועתק</string>
+    <string name="overlay_running">דַּבֵּר פעיל — הקש על הבועה כדי לדבר</string>
+    <string name="a11y_description">מאפשר ל־דבֵּר להזין טקסט מוקלד לשדה הטקסט הפעיל בכל אפליקציה.</string>
 </resources>
