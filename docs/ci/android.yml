@@ -1,0 +1,60 @@
+# CI for Dabber — builds a debug APK and publishes it on version tags.
+#
+# NOTE: For now the APK is signed with Android's auto-generated *debug* key
+# (`assembleDebug`). It is fully installable on a phone (after enabling
+# "install from unknown sources"), which is all we need while the app is in
+# preview. Before a real public release this should be swapped for a proper
+# release keystore injected via repository secrets (e.g. KEYSTORE_BASE64,
+# KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD) and `assembleRelease`.
+
+name: Android CI
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  # Required so the release job can create/attach to a GitHub Release.
+  contents: write
+
+jobs:
+  build:
+    name: Build debug APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload debug APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dabber-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+
+      - name: Attach APK to GitHub Release
+        # Only on version tags (v1, v0.1.0, ...). Uses the debug-signed APK
+        # produced above — see the keystore note at the top of this file.
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: app/build/outputs/apk/debug/app-debug.apk
+          fail_on_unmatched_files: true
