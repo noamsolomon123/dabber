@@ -13,3 +13,9 @@ __pycache__/
 models/*.bin
 models/*.gguf
 benchmark/data/
+# android
+.cxx/
+.idea/
+captures/
+*.hprof
+*.iml
