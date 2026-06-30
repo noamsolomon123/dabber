@@ -292,7 +292,7 @@ class BenchmarkActivity : AppCompatActivity() {
             setPadding(dp(12), dp(12), dp(12), dp(6))
         }
         val badge = TextView(this).apply {
-            text = getString(R.string.bench_npu_result, sec(seconds))
+            this.text = getString(R.string.bench_npu_result, sec(seconds))
             setTextColor(color(R.color.brand_primary))
             textSize = 16f
             setTypeface(typeface, Typeface.BOLD)
