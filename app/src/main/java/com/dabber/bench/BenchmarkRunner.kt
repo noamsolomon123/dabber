@@ -220,7 +220,7 @@ object BenchmarkRunner {
         val engine = QnnWhisperEngine()
         try {
             if (!engine.load(npuDir)) {
-                throw UnsatisfiedLinkError("QNN NPU (Hexagon) backend unavailable")
+                throw RuntimeException(engine.lastError ?: "QNN load failed (no detail)")
             }
             val t0 = System.nanoTime()
             val text = engine.transcribe(context, pcm, "he")

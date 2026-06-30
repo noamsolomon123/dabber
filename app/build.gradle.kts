@@ -11,8 +11,8 @@ android {
         applicationId = "com.dabber"
         minSdk = 26
         targetSdk = 35
-        versionCode = 5
-        versionName = "0.3.1"
+        versionCode = 6
+        versionName = "0.3.2"
 
         ndk {
             // arm64-v8a runs on the phone; x86_64 lets the same APK install on the emulator.

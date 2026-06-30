@@ -97,7 +97,12 @@ class QnnWhisperEngine {
      * which must contain the four model files. Resolves all tensor names/types/shapes from
      * the loaded graphs. Returns true on success (false on the emulator — no QNN HTP libs).
      */
+    /** Real error from the last failed load (surfaced to the user when QNN init fails). */
+    var lastError: String? = null
+        private set
+
     fun load(dir: File): Boolean {
+        lastError = null
         return try {
             val encOnnx = File(dir, "HfWhisperEncoder.onnx")
             val decOnnx = File(dir, "HfWhisperDecoder.onnx")
@@ -120,7 +125,8 @@ class QnnWhisperEngine {
             )
             true
         } catch (t: Throwable) {
-            Log.e(TAG, "load failed (expected on x86_64 emulator: no QNN HTP libs)", t)
+            lastError = "${t.javaClass.simpleName}: ${t.message ?: t}"
+            Log.e(TAG, "QNN load failed", t)
             false
         }
     }
