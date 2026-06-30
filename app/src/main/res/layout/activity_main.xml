@@ -622,7 +622,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/bg_scratch"
-                    android:gravity="top|end"
+                    android:gravity="top|start"
                     android:hint="@string/scratch_hint"
                     android:inputType="textMultiLine"
                     android:minLines="4"

@@ -185,7 +185,7 @@ object NpuModel {
         var redirects = 0
         while (true) {
             val connection = (URL(current).openConnection() as HttpURLConnection).apply {
-                instanceFollowRedirects = true
+                instanceFollowRedirects = false
                 connectTimeout = 30_000
                 readTimeout = 30_000
                 requestMethod = "GET"

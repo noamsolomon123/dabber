@@ -40,6 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     private val testRecorder = AudioRecorder()
 
+    @Volatile private var dictating = false
+
     private val permLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
             refresh()
@@ -95,8 +97,8 @@ class MainActivity : AppCompatActivity() {
             b.modelProgress.text = ""
         }
 
-        b.bubbleBtn.isEnabled = micOk && overlayOk && modelOk
-        b.dictateBtn.isEnabled = micOk && modelOk
+        b.bubbleBtn.isEnabled = micOk && overlayOk && modelOk && a11yOk && !dictating
+        b.dictateBtn.isEnabled = micOk && modelOk && !dictating
         b.downloadBtn.visibility =
             if (!modelOk && ModelConfig.hasRemoteSource) View.VISIBLE else View.GONE
     }
@@ -149,13 +151,20 @@ class MainActivity : AppCompatActivity() {
                         b.modelProgressBar.setProgressCompat(p, true)
                     }
                 }
-                DictationCore.loadModel(f.absolutePath)
+                val loaded = DictationCore.loadModel(f.absolutePath)
                 runOnUiThread {
-                    b.modelProgress.text = getString(R.string.model_done)
+                    b.modelProgressBar.visibility = View.GONE
+                    if (loaded) {
+                        b.modelProgress.text = getString(R.string.model_done)
+                    } else {
+                        b.modelProgress.text = getString(R.string.model_failed, "load")
+                        b.downloadBtn.isEnabled = true
+                    }
                     refresh()
                 }
             } catch (e: Exception) {
                 runOnUiThread {
+                    b.modelProgressBar.visibility = View.GONE
                     b.modelProgress.text = getString(R.string.model_failed, e.message ?: "")
                     b.downloadBtn.isEnabled = true
                 }
@@ -293,6 +302,10 @@ class MainActivity : AppCompatActivity() {
     // --- Bubble --------------------------------------------------------------
 
     private fun toggleBubble() {
+        if (!isAccessibilityEnabled()) {
+            toast(getString(R.string.perm_a11y_grant))
+            startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)); return
+        }
         OverlayService.start(this)
         toast(getString(R.string.bubble_started))
     }
@@ -302,21 +315,29 @@ class MainActivity : AppCompatActivity() {
     private fun dictateIntoScratchpad() {
         if (!DictationCore.modelLoaded) { toast(getString(R.string.no_model)); return }
         if (!AudioRecorder.hasPermission(this)) { requestMic(); return }
+        if (dictating) return
+        dictating = true
         b.dictateBtn.isEnabled = false
         b.dictateBtn.text = getString(R.string.dictating)
         Thread {
-            val pcm = testRecorder.record()
-            runOnUiThread { b.dictateBtn.text = getString(R.string.transcribing) }
-            val text = DictationCore.transcribeClean(pcm, ModelConfig.LANG)
-            runOnUiThread {
-                if (text.isNotBlank()) {
-                    val at = b.scratch.selectionStart.coerceIn(0, b.scratch.text.length)
-                    b.scratch.text.insert(at, text)
-                } else {
-                    toast(getString(R.string.no_speech))
+            try {
+                val pcm = testRecorder.record()
+                runOnUiThread { b.dictateBtn.text = getString(R.string.transcribing) }
+                val text = DictationCore.transcribeClean(pcm, ModelConfig.LANG)
+                runOnUiThread {
+                    if (text.isNotBlank()) {
+                        val at = b.scratch.selectionStart.coerceIn(0, b.scratch.text.length)
+                        b.scratch.text.insert(at, text)
+                    } else {
+                        toast(getString(R.string.no_speech))
+                    }
                 }
-                b.dictateBtn.isEnabled = true
-                b.dictateBtn.text = getString(R.string.dictate_btn)
+            } finally {
+                runOnUiThread {
+                    dictating = false
+                    b.dictateBtn.text = getString(R.string.dictate_btn)
+                    refresh()
+                }
             }
         }.start()
     }

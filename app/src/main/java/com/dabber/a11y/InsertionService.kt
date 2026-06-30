@@ -32,7 +32,7 @@ class InsertionService : AccessibilityService() {
         // changes so we can detect when an editable field gains/loses input focus (keyboard
         // up/down) and drive the bubble's visibility.
         runCatching {
-            val info = serviceInfo ?: AccessibilityServiceInfo()
+            val info = serviceInfo ?: return@runCatching
             info.eventTypes = info.eventTypes or
                 AccessibilityEvent.TYPE_VIEW_FOCUSED or
                 AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED or
@@ -85,6 +85,7 @@ class InsertionService : AccessibilityService() {
             node?.recycle()
             result
         }.getOrDefault(false)
+        @Suppress("DEPRECATION") root.recycle()
 
         if (editable != editableFocused) {
             editableFocused = editable
@@ -112,11 +113,18 @@ class InsertionService : AccessibilityService() {
     private fun findFocusedEditable(): AccessibilityNodeInfo? {
         val root = rootInActiveWindow ?: return null
         val focus = root.findFocus(AccessibilityNodeInfo.FOCUS_INPUT)
-        return if (focus != null && focus.isEditable) focus else null
+        @Suppress("DEPRECATION") root.recycle()
+        if (focus == null || !focus.isEditable) {
+            @Suppress("DEPRECATION") focus?.recycle()
+            return null
+        }
+        return focus
     }
 
     private fun insertViaSetText(node: AccessibilityNodeInfo, text: String): Boolean {
-        val current = node.text?.toString() ?: ""
+        // Empty hinted fields expose the HINT via getText() with isShowingHintText=true
+        // (AOSP TextView). Treat that as empty so we replace the hint instead of appending.
+        val current = if (node.isShowingHintText) "" else node.text?.toString() ?: ""
         val len = current.length
         val selEnd = node.textSelectionEnd.let { if (it in 0..len) it else len }
         val selStart = node.textSelectionStart.let { if (it in 0..selEnd) it else selEnd }
@@ -136,6 +144,15 @@ class InsertionService : AccessibilityService() {
         }
         if (!node.performAction(AccessibilityNodeInfo.ACTION_SET_TEXT, setArgs)) return false
 
+        // performAction can return true while Compose/WebView fields silently ignore SET_TEXT.
+        // Re-read and only declare failure on a CONFIRMED no-op, so insertText() falls through
+        // to the clipboard-paste path. Guard with refresh()==true to avoid a false negative
+        // (which would double-insert via the paste fallback).
+        if (node.refresh()) {
+            val after = node.text?.toString().orEmpty()
+            if (node.isShowingHintText || (after != merged && !after.contains(text))) return false
+        }
+
         val caret = (selStart + insert.length).coerceIn(0, merged.length)
         val selArgs = Bundle().apply {
             putInt(AccessibilityNodeInfo.ACTION_ARGUMENT_SELECTION_START_INT, caret)
@@ -147,9 +164,13 @@ class InsertionService : AccessibilityService() {
 
     private fun pasteViaClipboard(node: AccessibilityNodeInfo, text: String): Boolean {
         val cm = getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager ?: return false
+        val prev = cm.primaryClip
         cm.setPrimaryClip(ClipData.newPlainText("dabber", text))
         node.performAction(AccessibilityNodeInfo.ACTION_FOCUS)
-        return node.performAction(AccessibilityNodeInfo.ACTION_PASTE)
+        val pasted = node.performAction(AccessibilityNodeInfo.ACTION_PASTE)
+        if (prev != null) android.os.Handler(android.os.Looper.getMainLooper())
+            .postDelayed({ runCatching { cm.setPrimaryClip(prev) } }, 500)
+        return pasted
     }
 
     companion object {

@@ -87,7 +87,7 @@ class BenchmarkActivity : AppCompatActivity() {
     // --- Live elapsed timer --------------------------------------------------
 
     private var timerStart = 0L
-    private var timerLabel = ""
+    @Volatile private var timerLabel = ""
 
     /** Status line the live timer writes to (record vs. NPU card); set in [startElapsedTimer]. */
     private var timerTarget: TextView? = null
@@ -114,6 +114,7 @@ class BenchmarkActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         ui.removeCallbacks(timerTick)
+        recorder.requestStop()
         executor.shutdownNow()
         super.onDestroy()
     }
@@ -144,11 +145,16 @@ class BenchmarkActivity : AppCompatActivity() {
                 val audioSec = pcm.size / SAMPLE_RATE_HZ
                 runOnUiThread { prepareResultsTable(::addRecordHeader) }
 
+                var anyOk = false
                 for (variant in ModelVariants.ALL) {
                     val result = runOneRecordModel(variant, pcm, audioSec)
+                    if (result.ok) anyOk = true
                     runOnUiThread { addRecordRow(result) }
                 }
-                runOnUiThread { setStatus(getString(R.string.bench_done), R.color.brand_success) }
+                runOnUiThread {
+                    if (anyOk) setStatus(getString(R.string.bench_done), R.color.brand_success)
+                    else setStatus(getString(R.string.bench_failed, getString(R.string.bench_err_generic)), R.color.brand_accent)
+                }
             } catch (e: UnsatisfiedLinkError) {
                 runOnUiThread { setStatus(getString(R.string.bench_err_native), R.color.brand_accent) }
             } catch (e: OutOfMemoryError) {
@@ -163,13 +169,12 @@ class BenchmarkActivity : AppCompatActivity() {
 
     /** Downloads, loads, times and releases one model — never throws (failures become a row). */
     private fun runOneRecordModel(variant: Variant, pcm: FloatArray, audioSec: Double): RecordResult {
+        runOnUiThread { startElapsedTimer(variant.id) }   // tick from the moment this model starts
         return try {
             val modelFile = BenchmarkRunner.ensureModel(this, variant) { percent ->
-                runOnUiThread {
-                    if (running) setStatus(getString(R.string.bench_downloading, variant.id, percent), R.color.muted)
-                }
+                timerLabel = getString(R.string.bench_downloading, variant.id, percent)
             }
-            runOnUiThread { startElapsedTimer(variant.id) }
+            timerLabel = variant.id
             val (ms, text) = BenchmarkRunner.transcribePcm(modelFile, pcm)
             RecordResult(variant.id, ms, audioSec, text, error = null)
         } catch (e: UnsatisfiedLinkError) {
@@ -191,11 +196,16 @@ class BenchmarkActivity : AppCompatActivity() {
         executor.execute {
             try {
                 runOnUiThread { prepareResultsTable(::addWerHeader) }
+                var anyOk = false
                 for (variant in ModelVariants.ALL) {
                     val outcome = runOneWerModel(variant)
+                    if (outcome.result != null) anyOk = true
                     runOnUiThread { addWerRow(outcome) }
                 }
-                runOnUiThread { setStatus(getString(R.string.bench_done), R.color.brand_success) }
+                runOnUiThread {
+                    if (anyOk) setStatus(getString(R.string.bench_done), R.color.brand_success)
+                    else setStatus(getString(R.string.bench_failed, getString(R.string.bench_err_generic)), R.color.brand_accent)
+                }
             } catch (e: UnsatisfiedLinkError) {
                 runOnUiThread { setStatus(getString(R.string.bench_err_native), R.color.brand_accent) }
             } catch (e: OutOfMemoryError) {
@@ -210,9 +220,10 @@ class BenchmarkActivity : AppCompatActivity() {
 
     /** Runs the existing accuracy path for one model — never throws (failures become a row). */
     private fun runOneWerModel(variant: Variant): WerOutcome {
+        runOnUiThread { startElapsedTimer(variant.id) }
         return try {
             val result = BenchmarkRunner.run(this, variant) { msg ->
-                runOnUiThread { if (running) setStatus(msg, R.color.muted) }
+                timerLabel = "${variant.id} · $msg"   // keep the timer moving; surface clip progress
             }
             WerOutcome(variant.id, result, error = null)
         } catch (e: UnsatisfiedLinkError) {
@@ -221,6 +232,8 @@ class BenchmarkActivity : AppCompatActivity() {
             WerOutcome(variant.id, null, getString(R.string.bench_err_oom))
         } catch (t: Throwable) {
             WerOutcome(variant.id, null, t.message ?: getString(R.string.bench_err_generic))
+        } finally {
+            runOnUiThread { stopElapsedTimer() }
         }
     }
 
@@ -253,6 +266,10 @@ class BenchmarkActivity : AppCompatActivity() {
                 val pcm = recorder.record()
                 if (pcm.isEmpty()) {
                     runOnUiThread { setNpuStatus(getString(R.string.no_speech), R.color.brand_accent) }
+                    return@execute
+                }
+                if (!Build.SUPPORTED_ABIS.contains("arm64-v8a")) {
+                    runOnUiThread { setNpuStatus(getString(R.string.bench_npu_unsupported), R.color.brand_accent) }
                     return@execute
                 }
 

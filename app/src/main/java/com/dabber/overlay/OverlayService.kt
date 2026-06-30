@@ -92,7 +92,7 @@ class OverlayService : Service() {
 
     override fun onBind(intent: Intent?): IBinder? = null
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_STICKY
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int = START_NOT_STICKY
 
     override fun onCreate() {
         super.onCreate()
@@ -108,6 +108,7 @@ class OverlayService : Service() {
 
     override fun onDestroy() {
         serviceInstance = null
+        recorder.requestStop()          // unblock a listening record() loop; shutdownNow can't
         main.removeCallbacks(hideRunnable)
         colorAnim?.cancel(); colorAnim = null
         root?.let {
@@ -144,7 +145,10 @@ class OverlayService : Service() {
             y = dp(200)
         }
 
-        wm.addView(view, lp)
+        if (runCatching { wm.addView(view, lp) }.isFailure) {
+            stopSelf()
+            return
+        }
         root = view
 
         enterState(State.IDLE)
@@ -173,8 +177,9 @@ class OverlayService : Service() {
                     val dx = e.rawX - downX
                     val dy = e.rawY - downY
                     if (abs(dx) > dp(8) || abs(dy) > dp(8)) moved = true
-                    lp.x = startX + dx.toInt()
-                    lp.y = startY + dy.toInt()
+                    val dm = resources.displayMetrics
+                    lp.x = (startX + dx.toInt()).coerceIn(0, dm.widthPixels - lp.width)
+                    lp.y = (startY + dy.toInt()).coerceIn(0, dm.heightPixels - lp.height)
                     runCatching { wm.updateViewLayout(root, lp) }
                 }
                 MotionEvent.ACTION_UP -> {
@@ -192,6 +197,7 @@ class OverlayService : Service() {
         val view = root ?: return
         if (state != State.IDLE) return
         view.animate().cancel()
+        view.alpha = 1f
         view.animate().scaleX(0.92f).scaleY(0.92f).setDuration(110).start()
     }
 
@@ -362,26 +368,33 @@ class OverlayService : Service() {
         }
         enterState(State.LISTENING)
         worker.execute {
-            val pcm = recorder.record()
-            main.post { enterState(State.WORKING) }
-            val text = DictationCore.transcribeClean(pcm, ModelConfig.LANG)
-            main.post {
-                if (text.isBlank()) {
-                    // Nothing to insert — tell the user instead of silently resetting.
+            try {
+                val pcm = recorder.record()
+                main.post { enterState(State.WORKING) }
+                val text = DictationCore.transcribeClean(pcm, ModelConfig.LANG)
+                main.post {
+                    if (text.isBlank()) {
+                        // Nothing to insert — tell the user instead of silently resetting.
+                        toast(getString(R.string.no_speech))
+                        enterState(State.IDLE)
+                        return@post
+                    }
+                    // Try the focused-field insertion; on ANY failure (or no a11y service),
+                    // always fall back to the clipboard + a short toast so the user never gets
+                    // a silent "nothing happened".
+                    val inserted = runCatching { InsertionService.instance?.insertText(text) }
+                        .getOrNull() ?: false
+                    if (!inserted) {
+                        runCatching { copyToClipboard(text) }
+                        toast(getString(R.string.copied_clip))
+                    }
+                    playSuccess()
+                }
+            } catch (t: Throwable) {
+                main.post {
                     toast(getString(R.string.no_speech))
                     enterState(State.IDLE)
-                    return@post
                 }
-                // Try the focused-field insertion; on ANY failure (or no a11y service),
-                // always fall back to the clipboard + a short toast so the user never gets
-                // a silent "nothing happened".
-                val inserted = runCatching { InsertionService.instance?.insertText(text) }
-                    .getOrNull() ?: false
-                if (!inserted) {
-                    copyToClipboard(text)
-                    toast(getString(R.string.copied_clip))
-                }
-                playSuccess()
             }
         }
     }
@@ -404,10 +417,15 @@ class OverlayService : Service() {
             .setContentIntent(pi)
             .setOngoing(true)
             .build()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            startForeground(NOTIF_ID, notif, ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE)
-        } else {
-            startForeground(NOTIF_ID, notif)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                startForeground(NOTIF_ID, notif, ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE)
+            } else {
+                startForeground(NOTIF_ID, notif)
+            }
+        } catch (t: Throwable) {
+            android.util.Log.w("OverlayService", "startForeground(microphone) denied; stopping", t)
+            stopSelf(); return
         }
     }
 

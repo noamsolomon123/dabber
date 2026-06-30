@@ -25,7 +25,7 @@ class WhisperEngine {
      * [lang] is an ISO code ("he", "en") or "auto".
      */
     fun transcribe(pcm: FloatArray, lang: String = "he", threads: Int = defaultThreads()): String {
-        if (ctx == 0L) return ""
+        if (ctx == 0L || pcm.isEmpty()) return ""
         return nativeTranscribe(ctx, pcm, lang, threads)
     }
 
